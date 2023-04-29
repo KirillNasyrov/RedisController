@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RedisController.StartPage"
+             Title="StartPage">
+
+
+
+
+
+
+    <Grid BackgroundColor="#1f1f23">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+        <StackLayout BackgroundColor="#282a30"
+                     Grid.Column = "0"
+                     Grid.Row="0">
+
+            <ImageButton Source="redis.png"
+                         BackgroundColor="#282a30"
+                         VerticalOptions="StartAndExpand"
+                         Padding="10"
+                         Margin="0,10,0,0">
+                
+            </ImageButton>
+
+            <ImageButton Source="help.png"
+                         BackgroundColor="#282a30"
+                         VerticalOptions="End"
+                         Padding="15">
+
+            </ImageButton>
+
+            <ImageButton Source="settings.png"
+                         BackgroundColor="#282a30"
+                         VerticalOptions="End"
+                         Padding="12">
+                
+            </ImageButton>
+
+            <ImageButton Source="github.png"
+                         BackgroundColor="#282a30"
+                         VerticalOptions="End"
+                         Padding="12">
+
+            </ImageButton>
+        </StackLayout>
+
+
+
+        <Grid BackgroundColor="#1f1f23"
+                  Grid.Column = "1"
+                  Grid.Row="0">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+
+                <!--Первый ряд-->
+
+                 <Label Grid.Column="0"
+                        Grid.Row="0"
+                        FontSize="20"
+                        Margin="30,0,5,0"
+                        WidthRequest="300"
+                        TextColor="#d2d2d3"
+                        Text="Redis databases"
+                        FontFamily="Roboto"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start">
+
+                </Label>
+
+
+                <Image Source="logo.png"
+                       Grid.Column="1"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       Margin="2"  
+                       WidthRequest="350"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+
+                </Image>
+
+
+
+                <!--Второй ряд-->
+
+                <Button
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Margin="30,0,10,0"
+                    Text="+ ADD REDIS DATABASE"
+                    FontFamily="Roboto"
+                    FontSize="15"
+                    TextColor="#1f1f23"
+                    HeightRequest="45"
+                    HorizontalOptions="Fill">
+
+                    <Button.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#21ecac"
+                                Offset="0.1" />
+                            <GradientStop Color="#1ecbe4"
+                                Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+
+                </Button>
+
+
+
+
+
+
+
+            <Grid Grid.Column="1"
+                  Grid.Row="1"
+                  Margin="10"
+                  HeightRequest="45"
+                  BackgroundColor="#1f1f23"
+                  HorizontalOptions="Fill">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label  Grid.Column="0"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="3"
+                        FontSize="12"
+                        TextColor="#707382"
+                        Text="links to Redis guides:"
+                        FontFamily="Roboto"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start">
+
+                </Label>
+
+
+
+                <Label  Grid.Column="0"
+                        Grid.Row="1"
+                        FontSize="13"
+                        Margin="0,0,10,0"
+                        TextColor="#d2d2d3"
+                        Text="Build from the source"
+                        FontFamily="Roboto"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start">
+
+                </Label>
+
+                <Label  Grid.Column="1"
+                        Grid.Row="1"
+                        FontSize="13"
+                        Margin="5,0,10,0"
+                        TextColor="#d2d2d3"
+                        Text="With Docker"
+                        FontFamily="Roboto"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start">
+
+                </Label>
+
+                <Label  Grid.Column="2"
+                        Grid.Row="1"
+                        FontSize="13"
+                        Margin="5,0,10,0"
+                        TextColor="#d2d2d3"
+                        Text="GitHub"
+                        FontFamily="Roboto"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start">
+
+                </Label>
+
+
+
+            </Grid>
+
+
+
+            <SearchBar Placeholder="Search database..."
+                       Grid.Column="2"
+                       Grid.Row="1"
+                       Margin="10"
+                       HeightRequest="45"
+                       BackgroundColor="#282a30"
+                       TextColor="#707382"
+                       FontFamily="Roboto"
+                       HorizontalOptions="Fill">
+                    
+                </SearchBar>
+
+
+                <!--Третий ряд-->
+
+
+
+                <Grid BackgroundColor="#1f1f23"
+                      Grid.Row="2"
+                      Grid.ColumnSpan="3"
+                      Margin="30,5,10,5">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label  Grid.Row="0"
+                            Grid.Column="0"
+                            FontSize="20"
+                            TextColor="#707382"
+                            Text="DataBase Alias"
+                            FontFamily="Roboto"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center">
+
+                    </Label>
+
+
+                    <Label  Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="20"
+                            TextColor="#707382"
+                            Text="Host:Port"
+                            FontFamily="Roboto"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center">
+
+                    </Label>
+
+
+                    <Label  Grid.Row="0"
+                            Grid.Column="2"
+                            FontSize="20"
+                            TextColor="#707382"
+                            Text="Something else"
+                            FontFamily="Roboto"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center">
+
+                    </Label>
+
+
+                    <Label  Grid.Row="0"
+                            Grid.Column="3"
+                            FontSize="20"
+                            TextColor="#707382"
+                            Text="Last connection"
+                            FontFamily="Roboto"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center">
+
+                    </Label>
+
+
+
+
+
+                    <CollectionView Grid.Row="1"
+                                    Grid.ColumnSpan="4">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="6" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Tom</x:String>
+                                <x:String>Sam</x:String>
+                                <x:String>Bob</x:String>
+                                <x:String>Alice</x:String>
+                                <x:String>Kate</x:String>
+                            </x:Array>
+                        </CollectionView.ItemsSource>
+                        
+                        
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#282a30"
+                                        Stroke="#282a30">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+                                    <Grid>
+                                        
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="60"/>
+
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Grid.ColumnDefinitions>
+                                            
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+
+                                        </Grid.ColumnDefinitions>
+                                        
+                                    </Grid>
+                                    
+                                    
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+
+            </Grid>
+
+            </Grid>
+
+
+
+        </Grid>
+
+    
+
+</ContentPage>
