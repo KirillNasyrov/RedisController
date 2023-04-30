@@ -1,1 +1,1 @@
-D:\HSE\2 course\Coursework\RedisController\RedisController.csproj;x64
+D:\HSE\2 course\GitHub_Coursework\RedisController\RedisController.csproj;x64

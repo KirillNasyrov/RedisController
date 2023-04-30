@@ -25660,11 +25660,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HSE\\2 course\\Coursework\\RedisController\\RedisController.csproj",
+      "projectUniqueName": "D:\\HSE\\2 course\\GitHub_Coursework\\RedisController\\RedisController.csproj",
       "projectName": "RedisController",
-      "projectPath": "D:\\HSE\\2 course\\Coursework\\RedisController\\RedisController.csproj",
+      "projectPath": "D:\\HSE\\2 course\\GitHub_Coursework\\RedisController\\RedisController.csproj",
       "packagesPath": "C:\\Users\\kiril\\.nuget\\packages\\",
-      "outputPath": "D:\\HSE\\2 course\\Coursework\\RedisController\\obj\\",
+      "outputPath": "D:\\HSE\\2 course\\GitHub_Coursework\\RedisController\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

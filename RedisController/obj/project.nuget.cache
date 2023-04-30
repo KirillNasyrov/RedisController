@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E3ms6uEG5VZjtzxIJdeqa72iTZt7nKnZzaFjcT0LxzjjjSzgnRCCDyQ+xtUcKCPtAAeizzZeVcwBAgYR+VDxmg==",
+  "dgSpecHash": "79NQBXgmXR7o+Dp59p0q2pRx48hEaMZocP8RNbkM3xY79PCzW5GDt5iFPl1vZrwMl/icdTYIMv5ERnJj4cszOw==",
   "success": true,
-  "projectFilePath": "D:\\HSE\\2 course\\Coursework\\RedisController\\RedisController.csproj",
+  "projectFilePath": "D:\\HSE\\2 course\\GitHub_Coursework\\RedisController\\RedisController.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiril\\.nuget\\packages\\googlegson\\2.9.1.1\\googlegson.2.9.1.1.nupkg.sha512",
     "C:\\Users\\kiril\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",

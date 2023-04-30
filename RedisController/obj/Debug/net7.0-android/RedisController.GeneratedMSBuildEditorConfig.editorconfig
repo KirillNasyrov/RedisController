@@ -12,39 +12,39 @@ build_property.EnableSingleFileAnalyzer = true
 build_property.EnableTrimAnalyzer = false
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = RedisController
-build_property.ProjectDir = D:\HSE\2 course\Coursework\RedisController\
+build_property.ProjectDir = D:\HSE\2 course\GitHub_Coursework\RedisController\
 
-[D:/HSE/2 course/Coursework/RedisController/App.xaml]
+[D:/HSE/2 course/GitHub_Coursework/RedisController/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = RedisController.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 
-[D:/HSE/2 course/Coursework/RedisController/AppShell.xaml]
+[D:/HSE/2 course/GitHub_Coursework/RedisController/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = RedisController.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[D:/HSE/2 course/Coursework/RedisController/MainPage.xaml]
+[D:/HSE/2 course/GitHub_Coursework/RedisController/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = RedisController.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 
-[D:/HSE/2 course/Coursework/RedisController/Resources/Styles/Colors.xaml]
+[D:/HSE/2 course/GitHub_Coursework/RedisController/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = RedisController.Resources.Styles.Colors.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
 
-[D:/HSE/2 course/Coursework/RedisController/Resources/Styles/Styles.xaml]
+[D:/HSE/2 course/GitHub_Coursework/RedisController/Resources/Styles/Styles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = RedisController.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
 
-[D:/HSE/2 course/Coursework/RedisController/StartPage.xaml]
+[D:/HSE/2 course/GitHub_Coursework/RedisController/StartPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = RedisController.StartPage.xaml
 build_metadata.AdditionalFiles.TargetPath = StartPage.xaml
