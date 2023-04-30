@@ -1,6 +1,8 @@
 *.suo
 *.user
 _ReSharper.*
+.vs/
+RedisController/.vs
 .vs
 bin
 obj
