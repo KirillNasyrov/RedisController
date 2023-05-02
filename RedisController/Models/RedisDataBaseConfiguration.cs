@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RedisController.Models;
-internal class RedisDataBaseConfiguration
+public class RedisDataBaseConfiguration
 {
     public RedisDataBaseConfiguration(string identifier, string host, string port)
     {

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RedisController.StartPage"
-             Title="StartPage">
+             Title="StartPage"
+             Shell.NavBarIsVisible="False">
 
 
 
@@ -261,6 +262,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="60" />
                     </Grid.ColumnDefinitions>
 
                     <Label  Grid.Row="0"
@@ -320,12 +322,14 @@
 
                     <CollectionView x:Name="tableOfConfigs"
                                     Grid.Row="1"
-                                    Grid.ColumnSpan="4"
-                                    SelectionMode="Single">
+                                    Grid.ColumnSpan="5"
+                                    SelectionMode="Single"
+                                    ItemsSource="{Binding Configs}"
+                                    SelectionChanged="OnCollectionViewSelectionChanged">
 
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical"
-                                               ItemSpacing="6" />
+                                               ItemSpacing="4" />
                         </CollectionView.ItemsLayout>
 
 
@@ -335,7 +339,32 @@
                         <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Border BackgroundColor="#282a30"
-                                            Stroke="#282a30">
+                                            StrokeThickness="1"
+                                            Stroke="#1f1f23">
+
+
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+
+                                                <VisualState Name="Normal">
+                                                </VisualState>
+
+
+
+                                                <VisualState Name="PointerOver">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Stroke" Value="#29e3cf"></Setter>
+                                                        <Setter Property="StrokeThickness" Value="2"></Setter>
+                                                        <Setter Property="Margin" Value="0"></Setter>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+
+
+
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+
 
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="20" />
@@ -344,7 +373,7 @@
                                         <Grid>
                                         
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="55"/>
+                                                <RowDefinition Height="63"/>
 
                                             </Grid.RowDefinitions>
                                         
@@ -354,6 +383,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="60"/>
 
                                             </Grid.ColumnDefinitions>
                                         
@@ -404,6 +434,22 @@
                                                    HorizontalOptions="Start">
                                             
                                             </Label>
+                                            
+                                            
+                                            
+                                            <ImageButton Source="delete.png"
+                                                         Grid.Column="4"
+                                                         Margin="0,0,0,0"
+                                                         VerticalOptions="Center"
+                                                         HorizontalOptions="Start"
+                                                         BackgroundColor="#282a30"
+                                                         Padding="5"
+                                                         Clicked="OnButtonClicked"
+                                                         CommandParameter="{Binding .}">
+
+
+
+                                            </ImageButton>
                                         
                                         </Grid>
                                     

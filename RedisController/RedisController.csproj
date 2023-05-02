@@ -111,6 +111,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="RedisDataBasePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="StartPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
