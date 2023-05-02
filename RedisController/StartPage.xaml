@@ -325,7 +325,7 @@
                                     Grid.ColumnSpan="5"
                                     SelectionMode="Single"
                                     ItemsSource="{Binding Configs}"
-                                    SelectionChanged="OnCollectionViewSelectionChanged">
+                                    SelectionChanged="RedisConfigurationSelected">
 
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical"
@@ -444,7 +444,7 @@
                                                          HorizontalOptions="Start"
                                                          BackgroundColor="#282a30"
                                                          Padding="5"
-                                                         Clicked="OnButtonClicked"
+                                                         Clicked="RedisConfigurationRemoved"
                                                          CommandParameter="{Binding .}">
 
 

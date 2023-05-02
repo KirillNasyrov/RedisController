@@ -1,6 +1,8 @@
 using RedisController.Models;
 using System.Security.AccessControl;
 using StackExchange.Redis;
+using System.Windows.Input;
+using System;
 
 namespace RedisController;
 
@@ -8,12 +10,13 @@ public partial class StartPage : ContentPage
 {
 	public List<RedisDataBaseConfiguration> Configs { get; set; }
 
+
     public StartPage()
     {
         InitializeComponent();
 
-        Configs = new List<RedisDataBaseConfiguration>() { };
-        Configs .Add(new RedisDataBaseConfiguration("redis1", "localhost", "32778"));
+        Configs = new List<RedisDataBaseConfiguration>();
+        Configs.Add(new RedisDataBaseConfiguration("redis1", "localhost", "32778"));
         Configs.Add(new RedisDataBaseConfiguration("redis2", "localhost", "32779"));
         Configs.Add(new RedisDataBaseConfiguration("redis3", "localhost", "32780"));
         Configs.Add(new RedisDataBaseConfiguration("redis4", "localhost", "32781"));
@@ -23,15 +26,14 @@ public partial class StartPage : ContentPage
         BindingContext = this;
     }
 
-    void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void RedisConfigurationSelected(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is RedisDataBaseConfiguration currentConfig)
+        if (tableOfConfigs.SelectedItem != null)
         {
 
-            ToCommonPage(sender, e);
-            //Configs.Remove(currentConfig);
-            //tableOfConfigs.ItemsSource = new List<RedisDataBaseConfiguration>(Configs);
-            //tableOfConfigs.SelectedItem = null;
+
+            await Navigation.PushAsync(new RedisDataBasePage());
+            tableOfConfigs.SelectedItem = null;
         }
     }
 
@@ -40,7 +42,7 @@ public partial class StartPage : ContentPage
         await Navigation.PushAsync(new RedisDataBasePage());
     }
 
-    private void OnButtonClicked(object sender, System.EventArgs e)
+    private void RedisConfigurationRemoved(object sender, System.EventArgs e)
     {
         var button = sender as ImageButton;
         var currentConfig = button.CommandParameter as RedisDataBaseConfiguration;
