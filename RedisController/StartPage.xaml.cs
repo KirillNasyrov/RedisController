@@ -8,7 +8,10 @@ namespace RedisController;
 
 public partial class StartPage : ContentPage
 {
-	public List<RedisDataBaseConfiguration> Configs { get; set; }
+	public List<RedisDataBaseConfiguration> Configs 
+    {
+        get => connectionService.Configurations;
+    }
 
     private ConnectionService connectionService;
 
@@ -18,8 +21,6 @@ public partial class StartPage : ContentPage
 
         InitializeComponent();
 
-        Configs = new List<RedisDataBaseConfiguration>();
-        Configs.Add(new RedisDataBaseConfiguration("redis1", "localhost", "32768"));
         BindingContext = this;
     }
 
@@ -34,7 +35,7 @@ public partial class StartPage : ContentPage
             } 
             catch (Exception)
             {
-                await DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
+                await DisplayAlert("Alert", "Can not connect to data base", "OK");
             }
             finally
             {

@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace RedisController.Models;
 public class RedisDataBaseConfiguration
 {
-    public RedisDataBaseConfiguration(string identifier, string host, string port)
+    public RedisDataBaseConfiguration(string identifier, string host, string port, string password)
     {
         DataBaseID = identifier;
         DataBaseHost = host;
         DataBasePort = port;
         DataBaseLastConnection = new(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        DataBasePassword = password;
     }
 
     public string DataBaseID {
@@ -33,6 +34,12 @@ public class RedisDataBaseConfiguration
     }
 
     public DateOnly DataBaseLastConnection
+    {
+        get;
+        private set;
+    }
+
+    public string DataBasePassword
     {
         get;
         private set;
