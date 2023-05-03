@@ -10,19 +10,16 @@ public partial class StartPage : ContentPage
 {
 	public List<RedisDataBaseConfiguration> Configs { get; set; }
 
+    private ConnectionService connectionService;
 
     public StartPage()
     {
+        connectionService = new ConnectionService();
+
         InitializeComponent();
 
         Configs = new List<RedisDataBaseConfiguration>();
-        Configs.Add(new RedisDataBaseConfiguration("redis1", "localhost", "32778"));
-        Configs.Add(new RedisDataBaseConfiguration("redis2", "localhost", "32779"));
-        Configs.Add(new RedisDataBaseConfiguration("redis3", "localhost", "32780"));
-        Configs.Add(new RedisDataBaseConfiguration("redis4", "localhost", "32781"));
-        Configs.Add(new RedisDataBaseConfiguration("redis5", "localhost", "32782"));
-        Configs.Add(new RedisDataBaseConfiguration("redis6", "localhost", "32783"));
-        Configs.Add(new RedisDataBaseConfiguration("redis7", "localhost", "32784"));
+        Configs.Add(new RedisDataBaseConfiguration("redis1", "localhost", "32768"));
         BindingContext = this;
     }
 
@@ -30,17 +27,26 @@ public partial class StartPage : ContentPage
     {
         if (tableOfConfigs.SelectedItem != null)
         {
-
-
-            await Navigation.PushAsync(new RedisDataBasePage());
-            tableOfConfigs.SelectedItem = null;
+            try
+            {
+                var config = (RedisDataBaseConfiguration)tableOfConfigs.SelectedItem;
+                await Navigation.PushAsync(new RedisDataBasePage(connectionService.getConnection(config.DataBaseID)));
+            } 
+            catch (Exception)
+            {
+                await DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
+            }
+            finally
+            {
+                tableOfConfigs.SelectedItem = null;
+            }
         }
     }
 
-    private async void ToCommonPage(object? sender, EventArgs e)
+    /*private async void ToCommonPage(object? sender, EventArgs e)
     {
         await Navigation.PushAsync(new RedisDataBasePage());
-    }
+    }*/
 
     private void RedisConfigurationRemoved(object sender, System.EventArgs e)
     {
