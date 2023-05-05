@@ -2,47 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace RedisController.Models;
 public class RedisDataBaseConfiguration
 {
-    public RedisDataBaseConfiguration(string identifier, string host, string port, string password)
+    public string DataBaseID
     {
-        DataBaseID = identifier;
-        DataBaseHost = host;
-        DataBasePort = port;
-        DataBaseLastConnection = new(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-        DataBasePassword = password;
-    }
-
-    public string DataBaseID {
         get;
-        private set; 
+        set;
     }
 
     public string DataBaseHost
     {
         get;
-        private set;
+        set;
     }
 
     public string DataBasePort
     {
         get;
-        private set;
+        set;
     }
 
     public DateOnly DataBaseLastConnection
     {
         get;
-        private set;
+        set;
     }
 
     public string DataBasePassword
     {
         get;
-        private set;
+        set;
     }
+    public RedisDataBaseConfiguration(string identifier, string host, string port, string password)
+    {
+        DataBaseID = identifier;
+        DataBaseHost = host;
+        DataBasePort = port;
+        DataBaseLastConnection = DataBaseLastConnection = new(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        DataBasePassword = password;
+    }
+
+    [JsonConstructor]
+    public RedisDataBaseConfiguration()
+    {
+    }
+
 }
 

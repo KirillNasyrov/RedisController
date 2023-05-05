@@ -22,6 +22,8 @@ public partial class StartPage : ContentPage
         InitializeComponent();
 
         BindingContext = this;
+
+
     }
 
     private async void RedisConfigurationSelected(object sender, SelectionChangedEventArgs e)
@@ -35,7 +37,7 @@ public partial class StartPage : ContentPage
             } 
             catch (Exception)
             {
-                await DisplayAlert("Alert", "Can not connect to data base", "OK");
+                await DisplayAlert("Error", "Can not connect to data base", "OK");
             }
             finally
             {
@@ -55,10 +57,57 @@ public partial class StartPage : ContentPage
         var currentConfig = button.CommandParameter as RedisDataBaseConfiguration;
 
         // Удаление элемента из источника данных
-        Configs.Remove(currentConfig);
+        connectionService.Configurations.Remove(currentConfig);
 
         // Обновление источника данных для отображения обновленного списка
         tableOfConfigs.ItemsSource = new List<RedisDataBaseConfiguration>(Configs);
+        connectionService.UpdateConfigs();
+    }
+
+    private void AddRedisDataBaseClicked(object sender, System.EventArgs e)
+    {
+        gridOfConfigs.ColumnDefinitions.ElementAt(5).Width = new GridLength(2, GridUnitType.Star);
+    }
+
+    private void CancelAddingDataBaseClicked(object sender, System.EventArgs e)
+    {
+        dataBaseNameEntry.Text = null;
+        dataBaseHostEntry.Text = null;
+        dataBasePortEntry.Text = null;
+        dataBasePassswordEntry.Text = null;
+
+        gridOfConfigs.ColumnDefinitions.ElementAt(5).Width = new GridLength(0, GridUnitType.Star);
+    }
+
+    public async void ApplyAddingDataBaseClicked(object sender, System.EventArgs e)
+    {
+        if (Configs.FindAll((config) => config.DataBaseID == dataBaseNameEntry.Text).Any())
+        {
+            await DisplayAlert("Error", "You already has database with such name", "OK");
+        }
+        else
+        {
+            RedisDataBaseConfiguration config = new();
+            try
+            {
+                config = new RedisDataBaseConfiguration(dataBaseNameEntry.Text, dataBaseHostEntry.Text,
+                    dataBasePortEntry.Text, dataBasePassswordEntry.Text);
+
+                connectionService.Configurations.Add(config);
+                await Navigation.PushAsync(new RedisDataBasePage(connectionService.getConnection(config.DataBaseID)));
+
+                tableOfConfigs.ItemsSource = new List<RedisDataBaseConfiguration>(Configs);
+                connectionService.UpdateConfigs();
+
+
+                gridOfConfigs.ColumnDefinitions.ElementAt(5).Width = new GridLength(0, GridUnitType.Star);
+            }
+            catch (Exception ex)
+            {
+                connectionService.Configurations.Remove(config);
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
     }
 
 }
