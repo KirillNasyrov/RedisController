@@ -4,9 +4,181 @@
              x:Class="RedisController.RedisDataBasePage"
              Title="RedisDataBasePage"
              Shell.NavBarIsVisible="False">
-    <StackLayout>
-        <Label Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-    </StackLayout>
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"
+                            IsEnabled="False">
+            
+        </BackButtonBehavior>
+    </Shell.BackButtonBehavior>
+
+
+    <Grid BackgroundColor="#1f1f23">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <StackLayout BackgroundColor="#282a30"
+                     Grid.Column = "0"
+                     Grid.Row="0">
+
+            <ImageButton Source="redis.png"
+                         BackgroundColor="#282a30"
+                         VerticalOptions="StartAndExpand"
+                         Padding="10"
+                         Margin="0,10,0,0">
+
+            </ImageButton>
+
+            <ImageButton Source="help.png"
+                         BackgroundColor="#282a30"
+                         VerticalOptions="End"
+                         Padding="15">
+
+            </ImageButton>
+
+            <ImageButton Source="settings.png"
+                         BackgroundColor="#282a30"
+                         VerticalOptions="End"
+                         Padding="12">
+
+            </ImageButton>
+
+            <ImageButton Source="github.png"
+                         BackgroundColor="#282a30"
+                         VerticalOptions="End"
+                         Padding="12">
+
+            </ImageButton>
+        </StackLayout>
+
+
+
+
+
+
+        <Grid Grid.Row="0"
+              Grid.Column = "1"
+              ColumnSpacing="15"
+              Margin="30,15,10,5">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            
+            
+            
+            
+
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  BackgroundColor="#282a30">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+
+
+
+                <Grid Grid.Row="0"
+                      Grid.Column="0"
+                      BackgroundColor="#282a30">
+
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="65" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <ImageButton Source="back.png"
+                                 Grid.Row="0"
+                                 Grid.Column="0"
+                                 BackgroundColor="#282a30"
+                                 VerticalOptions="Center"
+                                 Padding="20,27,20,13"
+                                 x:Name="backButton"
+                                 Clicked="backButtonClicked">
+                        
+                    </ImageButton>
+
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Text="DataBase name:"
+                           FontSize="17"
+                           FontFamily="Roboto"
+                           TextColor="#d2d2d3"
+                           BackgroundColor="#282a30"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Start">
+                        
+                    </Label>
+
+
+                    <Entry Grid.Row="0"
+                           Grid.Column="2"
+                           Text="{Binding DataBaseName}"
+                           TextColor="#d2d2d3"
+                           FontSize="17"
+                           FontFamily="Roboto"
+                           BackgroundColor="#282a30"
+                           ClearButtonVisibility="WhileEditing"
+                           WidthRequest="200"
+                           Margin="0,10">
+                           
+                    </Entry>
+
+
+                </Grid>
+
+
+
+            </Grid>
+            
+            
+            
+            
+
+            <BoxView Grid.Row="0"
+                     Grid.Column="1"
+                     Color="#282a30">
+
+            </BoxView>
+
+
+
+        </Grid>
+
+
+        
+
+
+
+    </Grid>
 </ContentPage>

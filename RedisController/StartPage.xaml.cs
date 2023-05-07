@@ -33,7 +33,8 @@ public partial class StartPage : ContentPage
             try
             {
                 var config = (RedisDataBaseConfiguration)tableOfConfigs.SelectedItem;
-                await Navigation.PushAsync(new RedisDataBasePage(connectionService.getConnection(config.DataBaseID)));
+                var connectedDataBase = new RedisDataBase(connectionService.getConnection(config.DataBaseID));
+                await Navigation.PushAsync(new RedisDataBasePage(connectedDataBase, config.DataBaseID), false);
             } 
             catch (Exception)
             {
@@ -94,7 +95,8 @@ public partial class StartPage : ContentPage
                     dataBasePortEntry.Text, dataBasePassswordEntry.Text);
 
                 connectionService.Configurations.Add(config);
-                await Navigation.PushAsync(new RedisDataBasePage(connectionService.getConnection(config.DataBaseID)));
+                var connectedDataBase = new RedisDataBase(connectionService.getConnection(config.DataBaseID));
+                await Navigation.PushAsync(new RedisDataBasePage(connectedDataBase, config.DataBaseID));
 
                 tableOfConfigs.ItemsSource = new List<RedisDataBaseConfiguration>(Configs);
                 connectionService.UpdateConfigs();

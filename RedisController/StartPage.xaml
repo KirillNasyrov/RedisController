@@ -561,7 +561,8 @@
                                                BackgroundColor="#393c46"
                                                PlaceholderColor="#767a87"
                                                TextColor="#767a87"
-                                               x:Name="dataBaseNameEntry">
+                                               x:Name="dataBaseNameEntry"
+                                               IsSpellCheckEnabled="False">
 
                                         </Entry>
 
@@ -617,7 +618,8 @@
                                                BackgroundColor="#393c46"
                                                PlaceholderColor="#767a87"
                                                TextColor="#767a87"
-                                               x:Name="dataBaseHostEntry">
+                                               x:Name="dataBaseHostEntry"
+                                               IsSpellCheckEnabled="False">
 
                                         </Entry>
 
@@ -673,7 +675,8 @@
                                                HeightRequest="45"
                                                BackgroundColor="#393c46"
                                                TextColor="#767a87"
-                                               x:Name="dataBasePortEntry">
+                                               x:Name="dataBasePortEntry"
+                                               IsSpellCheckEnabled="False">
 
                                         </Entry>
 
@@ -733,7 +736,8 @@
                                                HeightRequest="45"
                                                BackgroundColor="#393c46"
                                                TextColor="#767a87"
-                                               x:Name="dataBasePassswordEntry">
+                                               x:Name="dataBasePassswordEntry"
+                                               IsSpellCheckEnabled="False">
 
                                         </Entry>
 

@@ -9,26 +9,15 @@ using StackExchange.Redis;
 
 namespace RedisController.Models;
 
-internal class RedisDataBase
+public class RedisDataBase
 {
-    private ConnectionMultiplexer connectionMultiplexer;
+    
+    public IDatabase DataBase { get; set; }
 
-    private IDatabase database;
-
-    public RedisDataBase(string configuration)
+    public RedisDataBase(IDatabase dataBase)
     {
-        connectionMultiplexer = ConnectionMultiplexer.Connect(configuration);
-        database = connectionMultiplexer.GetDatabase();
+        DataBase = dataBase;
     }
 
-    public string Alias
-    {
-        get => connectionMultiplexer.ClientName;
-    }
-
-    public string Configuration
-    {
-        get => connectionMultiplexer?.Configuration;
-    }
 }
 
