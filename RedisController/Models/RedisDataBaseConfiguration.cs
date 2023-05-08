@@ -8,35 +8,15 @@ using System.Threading.Tasks;
 namespace RedisController.Models;
 public class RedisDataBaseConfiguration
 {
-    public string DataBaseID
-    {
-        get;
-        set;
-    }
+    public string DataBaseID { get; set; }
 
-    public string DataBaseHost
-    {
-        get;
-        set;
-    }
+    public string DataBaseHost { get; set; }
 
-    public string DataBasePort
-    {
-        get;
-        set;
-    }
+    public string DataBasePort { get; set; }
 
-    public DateOnly DataBaseLastConnection
-    {
-        get;
-        set;
-    }
+    public DateOnly DataBaseLastConnection { get; set; }
 
-    public string DataBasePassword
-    {
-        get;
-        set;
-    }
+    public string DataBasePassword { get; set; }
     public RedisDataBaseConfiguration(string identifier, string host, string port, string password)
     {
         DataBaseID = identifier;

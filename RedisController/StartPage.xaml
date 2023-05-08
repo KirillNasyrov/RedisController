@@ -124,7 +124,7 @@
                         TextColor="#1f1f23"
                         HeightRequest="45"
                         HorizontalOptions="Fill"
-                        Clicked="AddRedisDataBaseClicked">
+                        Clicked="AddRedisDataBaseButtonClicked">
 
                         <Button.Background>
                             <LinearGradientBrush>
@@ -328,7 +328,7 @@
                                     Grid.ColumnSpan="5"
                                     SelectionMode="Single"
                                     ItemsSource="{Binding Configs}"
-                                    SelectionChanged="RedisConfigurationSelected">
+                                    SelectionChanged="RedisConfigurationSelectedAsync">
 
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical"
@@ -761,8 +761,8 @@
                                             FontSize="15"
                                             BackgroundColor="#393c46"
                                             TextColor="#d2d2d3"
-                                            x:Name="cancelAddingDataBase"
-                                            Clicked="CancelAddingDataBaseClicked">
+                                            x:Name="cancelAddingDataBaseButton"
+                                            Clicked="CancelAddingDataBaseButtonClicked">
 
                                     </Button>
 
@@ -788,8 +788,8 @@
                                             FontFamily="Roboto"
                                             FontSize="15"
                                             TextColor="#1f1f23"
-                                            x:Name="applyAddingDataBase"
-                                            Clicked="ApplyAddingDataBaseClicked">
+                                            x:Name="applyAddingDataBaseButton"
+                                            Clicked="ApplyAddingDataBaseButtonClickedAsync">
 
                                         <Button.Background>
                                             <LinearGradientBrush>

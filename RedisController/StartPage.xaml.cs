@@ -26,16 +26,30 @@ public partial class StartPage : ContentPage
 
     }
 
-    private async void RedisConfigurationSelected(object sender, SelectionChangedEventArgs e)
+    private async void RedisConfigurationSelectedAsync(object sender, SelectionChangedEventArgs e)
     {
         if (tableOfConfigs.SelectedItem != null)
         {
             try
             {
-                var config = (RedisDataBaseConfiguration)tableOfConfigs.SelectedItem;
-                var connectedDataBase = new RedisDataBase(connectionService.getConnection(config.DataBaseID));
-                await Navigation.PushAsync(new RedisDataBasePage(connectedDataBase, config.DataBaseID), false);
-            } 
+                var selectedConfig = (RedisDataBaseConfiguration)tableOfConfigs.SelectedItem;
+
+                if (!connectionService.WasConnected(selectedConfig.DataBaseID))
+                {
+                    var connectionTask = connectionService.GetConnectionAsync(selectedConfig.DataBaseID);
+
+                    var connection = await connectionTask;
+                    connectionService.AddNewConnection(selectedConfig.DataBaseID, connection);
+                }
+               
+                var connectedDataBase = new RedisDataBase(connectionService.GetAddedDataBase(selectedConfig.DataBaseID));
+
+                await Navigation.PushAsync(new RedisDataBasePage(connectedDataBase, selectedConfig.DataBaseID), false);
+            }
+            catch (ArgumentException ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
             catch (Exception)
             {
                 await DisplayAlert("Error", "Can not connect to data base", "OK");
@@ -47,10 +61,6 @@ public partial class StartPage : ContentPage
         }
     }
 
-    /*private async void ToCommonPage(object? sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new RedisDataBasePage());
-    }*/
 
     private void RedisConfigurationRemoved(object sender, System.EventArgs e)
     {
@@ -65,12 +75,12 @@ public partial class StartPage : ContentPage
         connectionService.UpdateConfigs();
     }
 
-    private void AddRedisDataBaseClicked(object sender, System.EventArgs e)
+    private void AddRedisDataBaseButtonClicked(object sender, System.EventArgs e)
     {
         gridOfConfigs.ColumnDefinitions.ElementAt(5).Width = new GridLength(2, GridUnitType.Star);
     }
 
-    private void CancelAddingDataBaseClicked(object sender, System.EventArgs e)
+    private void CancelAddingDataBaseButtonClicked(object sender, System.EventArgs e)
     {
         dataBaseNameEntry.Text = null;
         dataBaseHostEntry.Text = null;
@@ -80,7 +90,7 @@ public partial class StartPage : ContentPage
         gridOfConfigs.ColumnDefinitions.ElementAt(5).Width = new GridLength(0, GridUnitType.Star);
     }
 
-    public async void ApplyAddingDataBaseClicked(object sender, System.EventArgs e)
+    public async void ApplyAddingDataBaseButtonClickedAsync(object sender, System.EventArgs e)
     {
         if (Configs.FindAll((config) => config.DataBaseID == dataBaseNameEntry.Text).Any())
         {
@@ -88,15 +98,21 @@ public partial class StartPage : ContentPage
         }
         else
         {
-            RedisDataBaseConfiguration config = new();
+            var newConfig = new RedisDataBaseConfiguration(dataBaseNameEntry.Text, dataBaseHostEntry.Text,
+                    dataBasePortEntry.Text, dataBasePassswordEntry.Text);
             try
             {
-                config = new RedisDataBaseConfiguration(dataBaseNameEntry.Text, dataBaseHostEntry.Text,
-                    dataBasePortEntry.Text, dataBasePassswordEntry.Text);
+                var connectionTask = connectionService.GetConnectionAsync(newConfig.DataBaseID);
 
-                connectionService.Configurations.Add(config);
-                var connectedDataBase = new RedisDataBase(connectionService.getConnection(config.DataBaseID));
-                await Navigation.PushAsync(new RedisDataBasePage(connectedDataBase, config.DataBaseID));
+                var connection = await connectionTask;
+                connectionService.AddNewConnection(newConfig.DataBaseID, connection);
+
+
+                var connectedDataBase = new RedisDataBase(connectionService.GetAddedDataBase(newConfig.DataBaseID));
+                connectionService.Configurations.Add(newConfig);
+
+
+                await Navigation.PushAsync(new RedisDataBasePage(connectedDataBase, newConfig.DataBaseID), false);
 
                 tableOfConfigs.ItemsSource = new List<RedisDataBaseConfiguration>(Configs);
                 connectionService.UpdateConfigs();
@@ -104,10 +120,13 @@ public partial class StartPage : ContentPage
 
                 gridOfConfigs.ColumnDefinitions.ElementAt(5).Width = new GridLength(0, GridUnitType.Star);
             }
+            catch (ArgumentException ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
             catch (Exception ex)
             {
-                connectionService.Configurations.Remove(config);
-                await DisplayAlert("Error", ex.Message, "OK");
+                await DisplayAlert("Error", "Can not connect", "OK");
             }
         }
     }

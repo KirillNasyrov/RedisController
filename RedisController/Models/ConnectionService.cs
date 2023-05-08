@@ -39,38 +39,38 @@ public class ConnectionService
         }
     }
 
-    public IDatabase getConnection(string dataBaseID)
+
+    public IDatabase GetAddedDataBase(string dataBaseID)
     {
-        if (Connections.ContainsKey(dataBaseID))
+        if (Connections[dataBaseID].IsConnected)
         {
-            if (Connections[dataBaseID].IsConnected)
-            {
-                return Connections[dataBaseID].GetDatabase();
-            }
-            throw new ArgumentException("Data base with such name is not connected");
+            return Connections[dataBaseID].GetDatabase();
         }
         else
         {
-            var config = Configurations.Find((conf) => conf.DataBaseID == dataBaseID);
-
-            string connectionConfig = $"{config.DataBaseHost}:{config.DataBasePort}, password = {config.DataBasePassword}";
-            Connections[dataBaseID] = ConnectionMultiplexer.Connect(connectionConfig);
-            return Connections[dataBaseID].GetDatabase();
+            throw new ArgumentException("database with such name is not connected");
         }
-
-        
-        
-    } 
-
-    public IDatabase AddNewConnection(string dataBaseID, string configuration, string password)
-    {
-        if (!Connections.ContainsKey(dataBaseID))
-        {
-            Connections[dataBaseID] = ConnectionMultiplexer.Connect($"{configuration}, password = {password}");
-            return Connections[dataBaseID].GetDatabase();
-        }
-        throw new ArgumentException("Data base with such name is already added");
     }
+
+    public void AddNewConnection(string dataBaseID, ConnectionMultiplexer newConnection)
+    {
+        Connections.Add(dataBaseID, newConnection);
+    }
+
+    public bool WasConnected(string dataBaseID)
+    {
+        return Connections.ContainsKey(dataBaseID);
+    }
+
+
+    public async Task<ConnectionMultiplexer> GetConnectionAsync(string dataBaseID)
+    {
+        var config = Configurations.Find((conf) => conf.DataBaseID == dataBaseID);
+
+        string connectionConfig = $"{config.DataBaseHost}:{config.DataBasePort}, password = {config.DataBasePassword}";
+        return await ConnectionMultiplexer.ConnectAsync(connectionConfig);
+    }
+
 
     public async void UpdateConfigs()
     {
