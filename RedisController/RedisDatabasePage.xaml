@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RedisController.RedisDataBasePage"
-             Title="RedisDataBasePage"
+             x:Class="RedisController.RedisDatabasePage"
+             Title="RedisDatabasePage"
              Shell.NavBarIsVisible="False">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False"
                             IsEnabled="False">
-            
+
         </BackButtonBehavior>
     </Shell.BackButtonBehavior>
 
@@ -25,7 +26,7 @@
 
 
         <StackLayout BackgroundColor="#282a30"
-                     Grid.Column = "0"
+                     Grid.Column="0"
                      Grid.Row="0">
 
             <ImageButton Source="redis.png"
@@ -59,17 +60,11 @@
         </StackLayout>
 
 
-
-
-
-
-
-
         <Grid Grid.Row="0"
-              Grid.Column = "1"
+              Grid.Column="1"
               ColumnSpacing="15"
               Margin="30,15,10,5">
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -78,11 +73,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-
-
-
-
 
 
             <Border Grid.Row="0"
@@ -94,9 +84,8 @@
                 </Border.StrokeShape>
 
 
-
                 <Grid BackgroundColor="#282a30"
-                  RowSpacing="10">
+                      RowSpacing="10">
 
 
                     <Grid.RowDefinitions>
@@ -108,7 +97,6 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
 
 
                     <!--Первый ряд-->
@@ -130,45 +118,44 @@
 
 
                         <ImageButton Source="back.png"
-                                 Grid.Row="0"
-                                 Grid.Column="0"
-                                 BackgroundColor="#282a30"
-                                 VerticalOptions="Center"
-                                 Padding="20,27,20,13"
-                                 x:Name="backButton"
-                                 Clicked="backButtonClicked">
+                                     Grid.Row="0"
+                                     Grid.Column="0"
+                                     BackgroundColor="#282a30"
+                                     VerticalOptions="Center"
+                                     Padding="20,27,20,13"
+                                     x:Name="BackButton"
+                                     Clicked="BackButtonClicked">
 
                         </ImageButton>
 
                         <Label Grid.Row="0"
-                           Grid.Column="1"
-                           Text="DataBase name:"
-                           FontSize="17"
-                           FontFamily="Roboto"
-                           TextColor="#d2d2d3"
-                           BackgroundColor="#282a30"
-                           VerticalTextAlignment="Center"
-                           HorizontalTextAlignment="Start">
+                               Grid.Column="1"
+                               Text="DataBase name:"
+                               FontSize="17"
+                               FontFamily="Roboto"
+                               TextColor="#d2d2d3"
+                               BackgroundColor="#282a30"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start">
 
                         </Label>
 
 
                         <Entry Grid.Row="0"
-                           Grid.Column="2"
-                           Text="{Binding DataBaseName}"
-                           TextColor="#d2d2d3"
-                           FontSize="17"
-                           FontFamily="Roboto"
-                           BackgroundColor="#282a30"
-                           ClearButtonVisibility="WhileEditing"
-                           WidthRequest="200"
-                           Margin="0,10">
+                               Grid.Column="2"
+                               Text="{Binding DataBaseName}"
+                               TextColor="#d2d2d3"
+                               FontSize="17"
+                               FontFamily="Roboto"
+                               BackgroundColor="#282a30"
+                               ClearButtonVisibility="WhileEditing"
+                               WidthRequest="200"
+                               Margin="0,10">
 
                         </Entry>
 
 
                     </Grid>
-
 
 
                     <!--Второй ряд-->
@@ -190,9 +177,6 @@
                         </Grid.ColumnDefinitions>
 
 
-
-
-
                         <Grid Grid.Row="0"
                               Grid.Column="0"
                               RowSpacing="2">
@@ -205,7 +189,6 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
-
 
 
                             <Label Grid.Row="0"
@@ -229,9 +212,8 @@
                                 </Border.StrokeShape>
 
 
-
                                 <Picker WidthRequest="100"
-                                        x:Name="typePicker"
+                                        x:Name="TypePicker"
                                         BackgroundColor="#282a30"
                                         VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center"
@@ -251,29 +233,16 @@
                             </Border>
 
 
-
                         </Grid>
 
 
-
-
-
-
                     </Grid>
-
 
 
                 </Grid>
 
             </Border>
 
-
-
-            
-            
-            
-            
-            
 
             <BoxView Grid.Row="0"
                      Grid.Column="1"
@@ -282,12 +251,7 @@
             </BoxView>
 
 
-
         </Grid>
-
-
-        
-
 
 
     </Grid>

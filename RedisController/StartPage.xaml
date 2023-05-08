@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RedisController.StartPage"
@@ -6,23 +7,19 @@
              Shell.NavBarIsVisible="False">
 
 
-
-
-
-
     <Grid BackgroundColor="#1f1f23">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="55" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
 
         <StackLayout BackgroundColor="#282a30"
-                     Grid.Column = "0"
+                     Grid.Column="0"
                      Grid.Row="0">
 
             <ImageButton Source="redis.png"
@@ -30,7 +27,7 @@
                          VerticalOptions="StartAndExpand"
                          Padding="10"
                          Margin="0,10,0,0">
-                
+
             </ImageButton>
 
             <ImageButton Source="help.png"
@@ -44,7 +41,7 @@
                          BackgroundColor="#282a30"
                          VerticalOptions="End"
                          Padding="12">
-                
+
             </ImageButton>
 
             <ImageButton Source="github.png"
@@ -56,15 +53,195 @@
         </StackLayout>
 
 
-
         <Grid BackgroundColor="#1f1f23"
-              Grid.Column = "1"
+              Grid.Column="1"
               Grid.Row="0">
 
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <!--Первый ряд-->
+
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   FontSize="20"
+                   Margin="30,0,5,0"
+                   WidthRequest="300"
+                   TextColor="#d2d2d3"
+                   Text="Redis databases"
+                   FontFamily="Roboto"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start">
+
+            </Label>
+
+
+            <Image Source="logo.png"
+                   Grid.Column="1"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Margin="2"
+                   WidthRequest="350"
+                   VerticalOptions="Center"
+                   HorizontalOptions="End">
+
+            </Image>
+
+
+            <!--Второй ряд-->
+
+            <Border Grid.Column="0"
+                    Grid.Row="1"
+                    HeightRequest="45"
+                    Margin="30,0,10,0"
+                    StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+
+                <Button
+                    Text="+ ADD REDIS DATABASE"
+                    FontFamily="Roboto"
+                    FontSize="15"
+                    TextColor="#1f1f23"
+                    HeightRequest="45"
+                    HorizontalOptions="Fill"
+                    Clicked="AddRedisDataBaseButtonClicked">
+
+                    <Button.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#21ecac"
+                                          Offset="0.1" />
+                            <GradientStop Color="#1ecbe4"
+                                          Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+
+                </Button>
+
+
+            </Border>
+
+
+            <Grid Grid.Column="1"
+                  Grid.Row="1"
+                  Margin="10"
+                  HeightRequest="45"
+                  BackgroundColor="#1f1f23"
+                  HorizontalOptions="Fill">
+
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70" />
-                    <RowDefinition Height="70" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="3"
+                       FontSize="12"
+                       TextColor="#707382"
+                       Text="links to Redis guides:"
+                       FontFamily="Roboto"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start">
+
+                </Label>
+
+
+                <Label Grid.Column="0"
+                       Grid.Row="1"
+                       FontSize="13"
+                       Margin="0,0,10,0"
+                       TextColor="#d2d2d3"
+                       Text="Build from the source"
+                       FontFamily="Roboto"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start">
+
+                </Label>
+
+                <Label Grid.Column="1"
+                       Grid.Row="1"
+                       FontSize="13"
+                       Margin="5,0,10,0"
+                       TextColor="#d2d2d3"
+                       Text="With Docker"
+                       FontFamily="Roboto"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start">
+
+                </Label>
+
+                <Label Grid.Column="2"
+                       Grid.Row="1"
+                       FontSize="13"
+                       Margin="5,0,10,0"
+                       TextColor="#d2d2d3"
+                       Text="GitHub"
+                       FontFamily="Roboto"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start">
+
+                </Label>
+
+
+            </Grid>
+
+
+            <Border Grid.Column="2"
+                    Grid.Row="1"
+                    Margin="10"
+                    HeightRequest="45"
+                    StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+
+
+                <SearchBar Placeholder="Search database..."
+                           BackgroundColor="#282a30"
+                           TextColor="#707382"
+                           FontFamily="Roboto"
+                           HeightRequest="45"
+                           HorizontalOptions="Fill">
+
+                </SearchBar>
+
+
+            </Border>
+
+
+            <!--Третий ряд-->
+
+
+            <Grid BackgroundColor="#1f1f23"
+                  Grid.Row="2"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="3"
+                  Margin="30,20,10,5"
+                  x:Name="GridOfConfigs">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -72,766 +249,533 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="0*" />
                 </Grid.ColumnDefinitions>
 
-
-
-                <!--Первый ряд-->
-
-                 <Label Grid.Column="0"
-                        Grid.Row="0"
-                        FontSize="20"
-                        Margin="30,0,5,0"
-                        WidthRequest="300"
-                        TextColor="#d2d2d3"
-                        Text="Redis databases"
-                        FontFamily="Roboto"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Start">
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="30,0,0,0"
+                       FontSize="12"
+                       TextColor="#707382"
+                       Text="Unique name"
+                       FontFamily="Roboto"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start">
 
                 </Label>
 
 
-                <Image Source="logo.png"
+                <Label Grid.Row="0"
                        Grid.Column="1"
-                       Grid.Row="0"
-                       Grid.ColumnSpan="2"
-                       Margin="2"  
-                       WidthRequest="350"
+                       Margin="30,0,0,0"
+                       FontSize="12"
+                       TextColor="#707382"
+                       Text="Host"
+                       FontFamily="Roboto"
                        VerticalOptions="Center"
-                       HorizontalOptions="End">
+                       HorizontalOptions="Start">
 
-                </Image>
+                </Label>
 
 
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Margin="30,0,0,0"
+                       FontSize="12"
+                       TextColor="#707382"
+                       Text="Port"
+                       FontFamily="Roboto"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start">
 
-                <!--Второй ряд-->
+                </Label>
 
-                <Border Grid.Column="0"
-                        Grid.Row="1"
-                        HeightRequest="45"
-                        Margin="30,0,10,0"
-                        StrokeThickness="0">
+
+                <Label Grid.Row="0"
+                       Grid.Column="3"
+                       Margin="30,0,0,0"
+                       FontSize="12"
+                       TextColor="#707382"
+                       Text="Last connection"
+                       FontFamily="Roboto"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start">
+
+                </Label>
+
+
+                <CollectionView x:Name="TableOfConfigs"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="5"
+                                SelectionMode="Single"
+                                ItemsSource="{Binding Configs}"
+                                SelectionChanged="RedisConfigurationSelectedAsync">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="4" />
+                    </CollectionView.ItemsLayout>
+
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BackgroundColor="#282a30"
+                                    StrokeThickness="1"
+                                    Stroke="#1f1f23">
+
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+
+                                        <VisualState Name="Normal">
+                                        </VisualState>
+
+
+                                        <VisualState Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Property="Stroke" Value="#29e3cf"></Setter>
+                                                <Setter Property="StrokeThickness" Value="2"></Setter>
+                                                <Setter Property="Margin" Value="0"></Setter>
+                                            </VisualState.Setters>
+                                        </VisualState>
+
+
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20" />
+                                </Border.StrokeShape>
+
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="63" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="60" />
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0"
+                                           Margin="30,0,0,0"
+                                           Text="{Binding DatabaseID}"
+                                           FontSize="17"
+                                           TextColor="#d2d2d3"
+                                           FontFamily="Roboto"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start">
+
+                                    </Label>
+
+
+                                    <Label Grid.Column="1"
+                                           Margin="30,0,0,0"
+                                           Text="{Binding DatabaseHost}"
+                                           FontSize="17"
+                                           TextColor="#d2d2d3"
+                                           FontFamily="Roboto"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start">
+
+                                    </Label>
+
+
+                                    <Label Grid.Column="2"
+                                           Margin="30,0,0,0"
+                                           Text="{Binding DatabasePort}"
+                                           FontSize="17"
+                                           TextColor="#d2d2d3"
+                                           FontFamily="Roboto"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start">
+
+                                    </Label>
+
+
+                                    <Label Grid.Column="3"
+                                           Margin="30,0,0,0"
+                                           Text="{Binding DatabaseLastConnection}"
+                                           FontSize="17"
+                                           TextColor="#d2d2d3"
+                                           FontFamily="Roboto"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start">
+
+                                    </Label>
+
+
+                                    <ImageButton Source="delete.png"
+                                                 Grid.Column="4"
+                                                 Margin="0,0,0,0"
+                                                 VerticalOptions="Center"
+                                                 HorizontalOptions="Start"
+                                                 BackgroundColor="#282a30"
+                                                 Padding="5"
+                                                 Clicked="RedisConfigurationRemoved"
+                                                 CommandParameter="{Binding .}">
+
+
+                                    </ImageButton>
+
+                                </Grid>
+
+
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+
+                <Border Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="5"
+                        Margin="30,0,0,0"
+                        Stroke="#282a30">
+
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="20" />
                     </Border.StrokeShape>
 
-                    <Button
-                        Text="+ ADD REDIS DATABASE"
-                        FontFamily="Roboto"
-                        FontSize="15"
-                        TextColor="#1f1f23"
-                        HeightRequest="45"
-                        HorizontalOptions="Fill"
-                        Clicked="AddRedisDataBaseButtonClicked">
 
-                        <Button.Background>
-                            <LinearGradientBrush>
-                                <GradientStop Color="#21ecac"
-                                    Offset="0.1" />
-                                <GradientStop Color="#1ecbe4"
-                                    Offset="1.0" />
-                            </LinearGradientBrush>
-                        </Button.Background>
-
-                    </Button>
-
-
-
-                </Border>
-
-
-
-
-
-
-                <Grid Grid.Column="1"
-                      Grid.Row="1"
-                      Margin="10"
-                      HeightRequest="45"
-                      BackgroundColor="#1f1f23"
-                      HorizontalOptions="Fill">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label  Grid.Column="0"
-                            Grid.Row="0"
-                            Grid.ColumnSpan="3"
-                            FontSize="12"
-                            TextColor="#707382"
-                            Text="links to Redis guides:"
-                            FontFamily="Roboto"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start">
-
-                    </Label>
-
-
-
-                    <Label  Grid.Column="0"
-                            Grid.Row="1"
-                            FontSize="13"
-                            Margin="0,0,10,0"
-                            TextColor="#d2d2d3"
-                            Text="Build from the source"
-                            FontFamily="Roboto"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start">
-
-                    </Label>
-
-                    <Label  Grid.Column="1"
-                            Grid.Row="1"
-                            FontSize="13"
-                            Margin="5,0,10,0"
-                            TextColor="#d2d2d3"
-                            Text="With Docker"
-                            FontFamily="Roboto"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start">
-
-                    </Label>
-
-                    <Label  Grid.Column="2"
-                            Grid.Row="1"
-                            FontSize="13"
-                            Margin="5,0,10,0"
-                            TextColor="#d2d2d3"
-                            Text="GitHub"
-                            FontFamily="Roboto"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start">
-
-                    </Label>
-
-
-
-                </Grid>
-
-
-                <Border Grid.Column="2"
-                        Grid.Row="1"
-                        Margin="10"
-                        HeightRequest="45"
-                        StrokeThickness="0">
-                    
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="20" />
-                    </Border.StrokeShape>
-                    
-                    
-                    <SearchBar Placeholder="Search database..."
-                               BackgroundColor="#282a30"
-                               TextColor="#707382"
-                               FontFamily="Roboto"
-                               HeightRequest="45"
-                               HorizontalOptions="Fill">
-                    
-                    </SearchBar>
-
-
-                </Border>
-            
-            
-
-                <!--Третий ряд-->
-
-
-
-                <Grid BackgroundColor="#1f1f23"
-                      Grid.Row="2"
-                      Grid.ColumnSpan="3"
-                      Margin="30,20,10,5"
-                      x:Name="gridOfConfigs">
-                    
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="0*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label  Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="30,0,0,0"
-                            FontSize="12"
-                            TextColor="#707382"
-                            Text="Unique name"
-                            FontFamily="Roboto"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start">
-
-                    </Label>
-
-
-                    <Label  Grid.Row="0"
-                            Grid.Column="1"
-                            Margin="30,0,0,0"
-                            FontSize="12"
-                            TextColor="#707382"
-                            Text="Host"
-                            FontFamily="Roboto"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start">
-
-                    </Label>
-
-
-                    <Label  Grid.Row="0"
-                            Grid.Column="2"
-                            Margin="30,0,0,0"
-                            FontSize="12"
-                            TextColor="#707382"
-                            Text="Port"
-                            FontFamily="Roboto"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start">
-
-                    </Label>
-
-
-                    <Label  Grid.Row="0"
-                            Grid.Column="3"
-                            Margin="30,0,0,0"
-                            FontSize="12"
-                            TextColor="#707382"
-                            Text="Last connection"
-                            FontFamily="Roboto"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start">
-
-                    </Label>
-
-
-
-
-
-                    <CollectionView x:Name="tableOfConfigs"
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="5"
-                                    SelectionMode="Single"
-                                    ItemsSource="{Binding Configs}"
-                                    SelectionChanged="RedisConfigurationSelectedAsync">
-
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical"
-                                               ItemSpacing="4" />
-                        </CollectionView.ItemsLayout>
-
-
-                        
-
-
-                        <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BackgroundColor="#282a30"
-                                            StrokeThickness="1"
-                                            Stroke="#1f1f23">
-
-
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup Name="CommonStates">
-
-                                                <VisualState Name="Normal">
-                                                </VisualState>
-
-
-
-                                                <VisualState Name="PointerOver">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="Stroke" Value="#29e3cf"></Setter>
-                                                        <Setter Property="StrokeThickness" Value="2"></Setter>
-                                                        <Setter Property="Margin" Value="0"></Setter>
-                                                    </VisualState.Setters>
-                                                </VisualState>
-
-
-
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
-
-
-
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="20" />
-                                        </Border.StrokeShape>
-
-                                        <Grid>
-                                        
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="63"/>
-
-                                            </Grid.RowDefinitions>
-                                        
-                                            <Grid.ColumnDefinitions>
-                                            
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="60"/>
-
-                                            </Grid.ColumnDefinitions>
-                                        
-                                            <Label Grid.Column="0"
-                                                   Margin="30,0,0,0"
-                                                   Text="{Binding DataBaseID}"
-                                                   FontSize="17"
-                                                   TextColor="#d2d2d3"
-                                                   FontFamily="Roboto"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="Start">
-                                            
-                                            </Label>
-                                            
-                                            
-                                            <Label Grid.Column="1"
-                                                   Margin="30,0,0,0"
-                                                   Text="{Binding DataBaseHost}"
-                                                   FontSize="17"
-                                                   TextColor="#d2d2d3"
-                                                   FontFamily="Roboto"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="Start">
-                                            
-                                            </Label>
-                                            
-                                            
-                                            
-                                            <Label Grid.Column="2"
-                                                   Margin="30,0,0,0"
-                                                   Text="{Binding DataBasePort}"
-                                                   FontSize="17"
-                                                   TextColor="#d2d2d3"
-                                                   FontFamily="Roboto"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="Start">
-                                            
-                                            </Label>
-
-
-                                            <Label Grid.Column="3"
-                                                   Margin="30,0,0,0"
-                                                   Text="{Binding DataBaseLastConnection}"
-                                                   FontSize="17"
-                                                   TextColor="#d2d2d3"
-                                                   FontFamily="Roboto"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="Start">
-                                            
-                                            </Label>
-                                            
-                                            
-                                            
-                                            <ImageButton Source="delete.png"
-                                                         Grid.Column="4"
-                                                         Margin="0,0,0,0"
-                                                         VerticalOptions="Center"
-                                                         HorizontalOptions="Start"
-                                                         BackgroundColor="#282a30"
-                                                         Padding="5"
-                                                         Clicked="RedisConfigurationRemoved"
-                                                         CommandParameter="{Binding .}">
-
-
-
-                                            </ImageButton>
-                                        
-                                        </Grid>
-                                    
-                                    
-                                    </Border>
-                                </DataTemplate>
-                        </CollectionView.ItemTemplate>
-
-                    </CollectionView>
-
-
-
-                    
-                    <Border Grid.Row="0"
-                            Grid.RowSpan="2"
-                            Grid.Column="5"
-                            Margin="30,0,0,0"
-                            Stroke="#282a30">
-
-                        
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20" />
-                        </Border.StrokeShape>
-                        
-                        
-
-                        <ScrollView >
-
-
-
-                            <Grid BackgroundColor="#282a30"
-                                  Padding="15"
-                                  x:Name="importRedisConfigPanel">
+                    <ScrollView>
+
+
+                        <Grid BackgroundColor="#282a30"
+                              Padding="15"
+                              x:Name="ImportRedisConfigPanel">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   FontFamily="Roboto"
+                                   Text="Enter correct host, port and password of your redis database. Also you should give it unique name. Database with invalid data won`t be added."
+                                   TextColor="#d2d2d3"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="End"
+                                   FontSize="15">
+
+                            </Label>
+
+
+                            <Grid Grid.Row="1"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="2"
+                                  Margin="0,40,0,0"
+                                  RowSpacing="5">
 
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="Unique name"
+                                       FontFamily="Roboto"
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="End"
+                                       HeightRequest="20"
+                                       TextColor="#d2d2d3"
+                                       FontSize="15">
+
+                                </Label>
+
+
+                                <Border Grid.Row="1"
+                                        Grid.Column="0"
+                                        StrokeThickness="0">
+
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+
+                                    <Entry Placeholder="Enter database name"
+                                           FontFamily="Roboto"
+                                           HeightRequest="45"
+                                           BackgroundColor="#393c46"
+                                           PlaceholderColor="#767a87"
+                                           TextColor="#767a87"
+                                           x:Name="DataBaseNameEntry"
+                                           IsSpellCheckEnabled="False">
+
+                                    </Entry>
+
+                                </Border>
+
+
+                            </Grid>
+
+
+                            <Grid Grid.Row="2"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="2"
+                                  Margin="0,25,0,0"
+                                  RowSpacing="5">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
 
                                 <Label Grid.Row="0"
                                        Grid.Column="0"
-                                       Grid.ColumnSpan="3"
+                                       Text="Host"
                                        FontFamily="Roboto"
-                                       Text="Enter correct host, port and password of your redis database. Also you should give it unique name. Database with invalid data won`t be added."
-                                       TextColor="#d2d2d3"
                                        HorizontalTextAlignment="Start"
                                        VerticalTextAlignment="End"
+                                       HeightRequest="20"
+                                       TextColor="#d2d2d3"
                                        FontSize="15">
 
                                 </Label>
 
 
-                                <Grid Grid.Row="1"
-                                      Grid.Column="0"
-                                      Grid.ColumnSpan="2"
-                                      Margin="0,40,0,0"
-                                      RowSpacing="5">
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-
-
-                                    <Label Grid.Row="0"
-                                           Grid.Column="0"
-                                           Text="Unique name"
-                                           FontFamily="Roboto"
-                                           HorizontalTextAlignment="Start"
-                                           VerticalTextAlignment="End"
-                                           HeightRequest="20"
-                                           TextColor="#d2d2d3"
-                                           FontSize="15">
-
-                                    </Label>
-                                    
-                                    
-                                    <Border Grid.Row="1"
-                                            Grid.Column="0"
-                                            StrokeThickness="0">
-
-
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="20" />
-                                        </Border.StrokeShape>
-
-
-                                        <Entry Placeholder="Enter database name"
-                                               FontFamily="Roboto"
-                                               HeightRequest="45"
-                                               BackgroundColor="#393c46"
-                                               PlaceholderColor="#767a87"
-                                               TextColor="#767a87"
-                                               x:Name="dataBaseNameEntry"
-                                               IsSpellCheckEnabled="False">
-
-                                        </Entry>
-
-                                    </Border>
-
-
-
-                                </Grid>
-
-
-
-                                <Grid Grid.Row="2"
-                                      Grid.Column="0"
-                                      Grid.ColumnSpan="2"
-                                      Margin="0,25,0,0"
-                                      RowSpacing="5">
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-
-
-                                    <Label Grid.Row="0"
-                                           Grid.Column="0"
-                                           Text="Host"
-                                           FontFamily="Roboto"
-                                           HorizontalTextAlignment="Start"
-                                           VerticalTextAlignment="End"
-                                           HeightRequest="20"
-                                           TextColor="#d2d2d3"
-                                           FontSize="15">
-
-                                    </Label>
-                                    
-                                    
-                                    <Border Grid.Row="1"
-                                            Grid.Column="0"
-                                            StrokeThickness="0">
-
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="20" />
-                                        </Border.StrokeShape>
-
-                                        <Entry Placeholder="Enter database host"
-                                               FontFamily="Roboto"
-                                               HeightRequest="45"
-                                               BackgroundColor="#393c46"
-                                               PlaceholderColor="#767a87"
-                                               TextColor="#767a87"
-                                               x:Name="dataBaseHostEntry"
-                                               IsSpellCheckEnabled="False">
-
-                                        </Entry>
-
-
-                                    </Border>
-
-
-                                </Grid>
-
-
-
-                                <Grid Grid.Row="3"
-                                      Grid.Column="0"
-                                      Grid.ColumnSpan="2"
-                                      Margin="0,25,0,0"
-                                      RowSpacing="5">
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-
-
-                                    <Label Grid.Row="0"
-                                           Grid.Column="0"
-                                           Text="Port"
-                                           FontFamily="Roboto"
-                                           HorizontalTextAlignment="Start"
-                                           VerticalTextAlignment="End"
-                                           HeightRequest="20"
-                                           TextColor="#d2d2d3"
-                                           FontSize="15">
-
-                                    </Label>
-                                    
-                                    
-                                    <Border Grid.Row="1"
-                                            Grid.Column="0"
-                                            StrokeThickness="0">
-                                        
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="20" />
-                                        </Border.StrokeShape>
-
-                                        <Entry Placeholder="Enter database port"
-                                               FontFamily="Roboto"
-                                               PlaceholderColor="#767a87"
-                                               HeightRequest="45"
-                                               BackgroundColor="#393c46"
-                                               TextColor="#767a87"
-                                               x:Name="dataBasePortEntry"
-                                               IsSpellCheckEnabled="False">
-
-                                        </Entry>
-
-
-                                    </Border>
-
-
-
-                                </Grid>
-
-
-
-
-                                <Grid Grid.Row="4"
-                                      Grid.Column="0"
-                                      Grid.ColumnSpan="2"
-                                      Margin="0,25,0,0"
-                                      RowSpacing="5">
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-
-
-                                    <Label Grid.Row="0"
-                                           Grid.Column="0"
-                                           Text="Password"
-                                           FontFamily="Roboto"
-                                           HorizontalTextAlignment="Start"
-                                           VerticalTextAlignment="End"
-                                           HeightRequest="20"
-                                           TextColor="#d2d2d3"
-                                           FontSize="15">
-
-                                    </Label>
-
-                                    
-                                    
-                                    <Border Grid.Row="1"
-                                            Grid.Column="0"
-                                            StrokeThickness="0">
-
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="20" />
-                                        </Border.StrokeShape>
-
-                                        <Entry Placeholder="Enter database password"
-                                               PlaceholderColor="#767a87"
-                                               FontFamily="Roboto"
-                                               IsPassword="True"
-                                               HeightRequest="45"
-                                               BackgroundColor="#393c46"
-                                               TextColor="#767a87"
-                                               x:Name="dataBasePassswordEntry"
-                                               IsSpellCheckEnabled="False">
-
-                                        </Entry>
-
-                                    </Border>
-
-                                </Grid>
-
-
-
-                                <Border Grid.Row="5"
+                                <Border Grid.Row="1"
                                         Grid.Column="0"
-                                        Margin="0,60,10,0"
                                         StrokeThickness="0">
 
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="20" />
                                     </Border.StrokeShape>
 
-                                    <Button Text="Cancel"
-                                            FontFamily="Roboto"
-                                            FontSize="15"
-                                            BackgroundColor="#393c46"
-                                            TextColor="#d2d2d3"
-                                            x:Name="cancelAddingDataBaseButton"
-                                            Clicked="CancelAddingDataBaseButtonClicked">
+                                    <Entry Placeholder="Enter database host"
+                                           FontFamily="Roboto"
+                                           HeightRequest="45"
+                                           BackgroundColor="#393c46"
+                                           PlaceholderColor="#767a87"
+                                           TextColor="#767a87"
+                                           x:Name="DataBaseHostEntry"
+                                           IsSpellCheckEnabled="False">
 
-                                    </Button>
+                                    </Entry>
 
 
                                 </Border>
-                                
-                                
-
-                                
-                                
-                                <Border Grid.Row="5"
-                                        Grid.Column="1"
-                                        Margin="10,60,0,0"
-                                        StrokeThickness="0">
-                                    
-                                    
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="20" />
-                                    </Border.StrokeShape>
-
-
-                                    <Button Text="Apply"
-                                            FontFamily="Roboto"
-                                            FontSize="15"
-                                            TextColor="#1f1f23"
-                                            x:Name="applyAddingDataBaseButton"
-                                            Clicked="ApplyAddingDataBaseButtonClickedAsync">
-
-                                        <Button.Background>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="#21ecac"
-                                                              Offset="0.1" />
-                                                <GradientStop Color="#1ecbe4"
-                                                              Offset="1.0" />
-                                            </LinearGradientBrush>
-                                        </Button.Background>
-
-                                    </Button>
-
-                                </Border>
-
-
-
 
 
                             </Grid>
 
 
+                            <Grid Grid.Row="3"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="2"
+                                  Margin="0,25,0,0"
+                                  RowSpacing="5">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
 
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="Port"
+                                       FontFamily="Roboto"
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="End"
+                                       HeightRequest="20"
+                                       TextColor="#d2d2d3"
+                                       FontSize="15">
 
-                        </ScrollView>
+                                </Label>
 
 
+                                <Border Grid.Row="1"
+                                        Grid.Column="0"
+                                        StrokeThickness="0">
 
-                    </Border>
-                    
-                    
-                    
-                    
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
 
-                </Grid>
+                                    <Entry Placeholder="Enter database port"
+                                           FontFamily="Roboto"
+                                           PlaceholderColor="#767a87"
+                                           HeightRequest="45"
+                                           BackgroundColor="#393c46"
+                                           TextColor="#767a87"
+                                           x:Name="DataBasePortEntry"
+                                           IsSpellCheckEnabled="False">
+
+                                    </Entry>
+
+
+                                </Border>
+
+
+                            </Grid>
+
+
+                            <Grid Grid.Row="4"
+                                  Grid.Column="0"
+                                  Grid.ColumnSpan="2"
+                                  Margin="0,25,0,0"
+                                  RowSpacing="5">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="Password"
+                                       FontFamily="Roboto"
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="End"
+                                       HeightRequest="20"
+                                       TextColor="#d2d2d3"
+                                       FontSize="15">
+
+                                </Label>
+
+
+                                <Border Grid.Row="1"
+                                        Grid.Column="0"
+                                        StrokeThickness="0">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+                                    <Entry Placeholder="Enter database password"
+                                           PlaceholderColor="#767a87"
+                                           FontFamily="Roboto"
+                                           IsPassword="True"
+                                           HeightRequest="45"
+                                           BackgroundColor="#393c46"
+                                           TextColor="#767a87"
+                                           x:Name="DataBasePassswordEntry"
+                                           IsSpellCheckEnabled="False">
+
+                                    </Entry>
+
+                                </Border>
+
+                            </Grid>
+
+
+                            <Border Grid.Row="5"
+                                    Grid.Column="0"
+                                    Margin="0,60,10,0"
+                                    StrokeThickness="0">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20" />
+                                </Border.StrokeShape>
+
+                                <Button Text="Cancel"
+                                        FontFamily="Roboto"
+                                        FontSize="15"
+                                        BackgroundColor="#393c46"
+                                        TextColor="#d2d2d3"
+                                        x:Name="CancelAddingDataBaseButton"
+                                        Clicked="CancelAddingDataBaseButtonClicked">
+
+                                </Button>
+
+
+                            </Border>
+
+
+                            <Border Grid.Row="5"
+                                    Grid.Column="1"
+                                    Margin="10,60,0,0"
+                                    StrokeThickness="0">
+
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20" />
+                                </Border.StrokeShape>
+
+
+                                <Button Text="Apply"
+                                        FontFamily="Roboto"
+                                        FontSize="15"
+                                        TextColor="#1f1f23"
+                                        x:Name="ApplyAddingDataBaseButton"
+                                        Clicked="ApplyAddingDatabaseButtonClickedAsync">
+
+                                    <Button.Background>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="#21ecac"
+                                                          Offset="0.1" />
+                                            <GradientStop Color="#1ecbe4"
+                                                          Offset="1.0" />
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+
+                                </Button>
+
+                            </Border>
+
+
+                        </Grid>
+
+
+                    </ScrollView>
+
+
+                </Border>
+
+
+            </Grid>
 
         </Grid>
 
 
-
     </Grid>
 
-    
 
 </ContentPage>

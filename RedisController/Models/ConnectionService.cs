@@ -11,7 +11,7 @@ namespace RedisController.Models;
 
 public class ConnectionService
 {
-    public List<RedisDataBaseConfiguration> Configurations { get; private set; }
+    public List<RedisDatabaseConfiguration> Configurations { get; private set; }
     private Dictionary<string, ConnectionMultiplexer> Connections {  get; set; }
 
     private string FileWithCongigs { get; set; }
@@ -19,7 +19,7 @@ public class ConnectionService
     public ConnectionService()
     {
         Connections = new Dictionary<string, ConnectionMultiplexer>();
-        Configurations = new List<RedisDataBaseConfiguration>();
+        Configurations = new List<RedisDatabaseConfiguration>();
         
         var appDataDirectory = FileSystem.AppDataDirectory;
         var configurationsDirectory = Path.Combine(appDataDirectory, "Configurations");
@@ -34,13 +34,13 @@ public class ConnectionService
         else
         {
             string jsonString = File.ReadAllText(FileWithCongigs);
-            Configurations = JsonSerializer.Deserialize<List<RedisDataBaseConfiguration>>(jsonString);
+            Configurations = JsonSerializer.Deserialize<List<RedisDatabaseConfiguration>>(jsonString);
             
         }
     }
 
 
-    public IDatabase GetAddedDataBase(string dataBaseID)
+    public IDatabase GetAddedDatabase(string dataBaseID)
     {
         if (Connections[dataBaseID].IsConnected)
         {
@@ -65,9 +65,9 @@ public class ConnectionService
 
     public async Task<ConnectionMultiplexer> GetConnectionAsync(string dataBaseID)
     {
-        var config = Configurations.Find((conf) => conf.DataBaseID == dataBaseID);
+        var config = Configurations.Find((conf) => conf.DatabaseID == dataBaseID);
 
-        string connectionConfig = $"{config.DataBaseHost}:{config.DataBasePort}, password = {config.DataBasePassword}";
+        string connectionConfig = $"{config.DatabaseHost}:{config.DatabasePort}, password = {config.DatabasePassword}";
         return await ConnectionMultiplexer.ConnectAsync(connectionConfig);
     }
 

@@ -9,14 +9,14 @@ using StackExchange.Redis;
 
 namespace RedisController.Models;
 
-public class RedisDataBase
+public class RedisDatabase
 {
     
-    public IDatabase DataBase { get; set; }
+    public IDatabase Database { get; set; }
 
-    public RedisDataBase(IDatabase dataBase)
+    public RedisDatabase(IDatabase database)
     {
-        DataBase = dataBase;
+        Database = database;
     }
 
 }
