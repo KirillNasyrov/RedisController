@@ -143,7 +143,7 @@
 
                         <Entry Grid.Row="0"
                                Grid.Column="2"
-                               Text="{Binding DataBaseName}"
+                               x:Name="DatabaseNameEnrty"
                                TextColor="#d2d2d3"
                                FontSize="17"
                                FontFamily="Roboto"
@@ -163,7 +163,8 @@
                     <Grid Grid.Row="1"
                           Grid.Column="0"
                           BackgroundColor="#282a30"
-                          Padding="20,0,0,0">
+                          Padding="20,0,20,0"
+                          ColumnSpacing="20">
 
 
                         <Grid.RowDefinitions>
@@ -172,8 +173,8 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
 
 
@@ -183,7 +184,7 @@
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -204,8 +205,9 @@
 
                             <Border Grid.Row="1"
                                     Grid.Column="0"
-                                    StrokeThickness="1"
-                                    Stroke="#29e3cf">
+                                    StrokeThickness="0"
+                                    HeightRequest="45"
+                                    VerticalOptions="End">
 
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="20" />
@@ -214,11 +216,12 @@
 
                                 <Picker WidthRequest="100"
                                         x:Name="TypePicker"
-                                        BackgroundColor="#282a30"
+                                        BackgroundColor="#393c46"
                                         VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center"
                                         TextColor="#d2d2d3"
-                                        VerticalOptions="End">
+                                        FontFamily="Roboto"
+                                        HeightRequest="45">
 
                                     <Picker.Items>
                                         <x:String>String</x:String>
@@ -236,7 +239,159 @@
                         </Grid>
 
 
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                StrokeThickness="0"
+                                VerticalOptions="End"
+                                HeightRequest="45">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20" />
+                            </Border.StrokeShape>
+
+
+                            <SearchBar BackgroundColor="#393c46"
+                                       TextColor="#767a87"
+                                       Placeholder="Search key..."
+                                       PlaceholderColor="#767a87"
+                                       FontFamily="Roboto">
+
+                            </SearchBar>
+
+                        </Border>
+
+
+                        <Border Grid.Row="1"
+                                Grid.Column="2"
+                                StrokeThickness="0"
+                                VerticalOptions="End"
+                                HeightRequest="45">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20" />
+                            </Border.StrokeShape>
+
+
+                            <Button Text="+ Key"
+                                    FontSize="15"
+                                    FontFamily="Roboto"
+                                    TextColor="#1f1f23">
+                                <Button.Background>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="#21ecac"
+                                                          Offset="0.1" />
+                                        <GradientStop Color="#1ecbe4"
+                                                          Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Button.Background>
+
+                            </Button>
+
+                        </Border>
+
+
                     </Grid>
+
+
+
+                    <!--Третий ряд-->
+
+                    <CollectionView x:Name="TableOfKeys"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    SelectionMode="Single"
+                                    ItemsSource="{Binding KeyTypePairs}"
+                                    SelectionChanged="RedisKeySelectedAsync"
+                                    Margin="0,20">
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"
+                                               ItemSpacing="0" />
+                        </CollectionView.ItemsLayout>
+
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#393c46"
+                                        StrokeThickness="0"
+                                        Margin="20,0">
+
+
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup Name="CommonStates">
+
+                                            <VisualState Name="Normal">
+                                            </VisualState>
+
+
+                                            <VisualState Name="PointerOver">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Stroke" Value="#29e3cf"></Setter>
+                                                    <Setter Property="StrokeThickness" Value="1"></Setter>
+                                                    <Setter Property="Margin" Value="18,2"></Setter>
+                                                </VisualState.Setters>
+                                            </VisualState>
+
+
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+                                    <Grid>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="33" />
+
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="3*" />
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0"
+                                               Grid.Column="0"
+                                               Margin="30,0,0,0"
+                                               Text="{Binding Value}"
+                                               FontSize="13"
+                                               BackgroundColor="#6703e1"
+                                               TextColor="#d2d2d3"
+                                               FontFamily="Roboto"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start"
+                                               Padding="4,2">
+
+                                        </Label>
+
+                                        <Label Grid.Row="0"
+                                               Grid.Column="1"
+                                               Margin="30,0,0,0"
+                                               Text="{Binding Key}"
+                                               FontSize="13"
+                                               TextColor="#d2d2d3"
+                                               FontFamily="Roboto"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start">
+
+                                        </Label>
+
+
+
+                                    </Grid>
+
+
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
 
 
                 </Grid>
@@ -244,11 +399,68 @@
             </Border>
 
 
-            <BoxView Grid.Row="0"
-                     Grid.Column="1"
-                     Color="#282a30">
+            <Border Grid.Row="0"
+                    Grid.Column="1"
+                    StrokeThickness="0">
 
-            </BoxView>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+
+
+                <Grid BackgroundColor="#282a30"
+                      x:Name="TypeGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition Width="0*" />
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <!--Ключ типа string-->
+                    <Grid Grid.Row="0"
+                          Grid.Column="1"
+                          RowSpacing="10"
+                          x:Name="TypeStringGrid"
+                          Padding="20,0">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Key review"
+                               FontSize="25"
+                               FontFamily="Roboto"
+                               TextColor="#d2d2d3"
+                               BackgroundColor="#282a30"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start">
+
+                        </Label>
+
+                    </Grid>
+                    
+                    
+                </Grid>
+
+            </Border>
 
 
         </Grid>

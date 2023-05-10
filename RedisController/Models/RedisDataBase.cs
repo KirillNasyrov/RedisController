@@ -11,12 +11,28 @@ namespace RedisController.Models;
 
 public class RedisDatabase
 {
-    
+    public IServer Server { get; set; }
     public IDatabase Database { get; set; }
 
-    public RedisDatabase(IDatabase database)
+    public RedisDatabase(ConnectionMultiplexer connection, RedisDatabaseConfiguration configuration)
     {
-        Database = database;
+        Database = connection.GetDatabase();
+
+        Server = connection.GetServer($"{configuration.DatabaseHost}:{configuration.DatabasePort}");
+    }
+
+    public IEnumerable<RedisKey> GetRedisKeys()
+    {
+        if (Server.IsConnected)
+        {
+            return Server.Keys(0);
+        }
+        throw new InvalidOperationException("Server is not connected");
+    }
+
+    public RedisType GetKeyType(RedisKey key)
+    {
+        return Database.KeyType(key);
     }
 
 }

@@ -39,19 +39,17 @@ public partial class StartPage
 
             if (!ConnectionService.WasConnected(selectedConfig.DatabaseID))
             {
-                var connection = await ConnectionService.GetConnectionAsync(selectedConfig.DatabaseID);
+                var connection = await ConnectionService.CreateConnectionAsync(selectedConfig.DatabaseID);
 
                 ConnectionService.AddNewConnection(selectedConfig.DatabaseID, connection);
             }
-
-            var connectedDatabase = new RedisDatabase(ConnectionService.GetAddedDatabase(selectedConfig.DatabaseID));
 
             ConnectionService.Configurations.Find(conf => conf.DatabaseID == selectedConfig.DatabaseID)
                 .UpdateLastTimeConnection();
             TableOfConfigs.ItemsSource = new List<RedisDatabaseConfiguration>(Configs);
             ConnectionService.UpdateConfigs();
 
-            await Navigation.PushAsync(new RedisDatabasePage(connectedDatabase, selectedConfig.DatabaseID), false);
+            await Navigation.PushAsync(new RedisDatabasePage(ConnectionService.Connections[selectedConfig.DatabaseID], selectedConfig), false);
         }
         catch (ArgumentException ex)
         {
@@ -108,16 +106,11 @@ public partial class StartPage
             {
                 ConnectionService.Configurations.Add(newConfig);
 
-                var connectionTask = ConnectionService.GetConnectionAsync(newConfig.DatabaseID);
-
-                var connection = await connectionTask;
+                var connection = await ConnectionService.CreateConnectionAsync(newConfig.DatabaseID);
                 ConnectionService.AddNewConnection(newConfig.DatabaseID, connection);
 
 
-                var connectedDataBase = new RedisDatabase(ConnectionService.GetAddedDatabase(newConfig.DatabaseID));
-
-
-                await Navigation.PushAsync(new RedisDatabasePage(connectedDataBase, newConfig.DatabaseID), false);
+                await Navigation.PushAsync(new RedisDatabasePage(connection, newConfig), false);
 
                 TableOfConfigs.ItemsSource = new List<RedisDatabaseConfiguration>(Configs);
                 ConnectionService.UpdateConfigs();
