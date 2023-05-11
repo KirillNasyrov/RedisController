@@ -35,5 +35,10 @@ public class RedisDatabase
         return Database.KeyType(key);
     }
 
+    public async Task<RedisValue> StringGetAsync(RedisKey key)
+    {
+        return await Database.StringGetAsync(key);
+    }
+
 }
 

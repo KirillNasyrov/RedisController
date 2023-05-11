@@ -455,9 +455,237 @@
 
                         </Label>
 
+
+                        <Grid Grid.Row="1"
+                              Grid.Column="0"
+                              ColumnSpacing="10">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="Key"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#707382"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#d2d2d3"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   x:Name="StringKeyNameLabel"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+
+
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="3"
+                                   Text="Value type"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#707382"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="4"
+                                   Text="String"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#d2d2d3"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+
+                        </Grid>
+
+
+
+                        <Border Grid.Row="2"
+                                Grid.Column="0"
+                                StrokeThickness="0"
+                                Margin="0,20">
+
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20" />
+                            </Border.StrokeShape>
+                            
+                            
+
+                            <Entry x:Name="StringValueEntry"
+                                   BackgroundColor="#393c46"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Start"
+                                   FontFamily="Roboto"
+                                   TextColor="#d2d2d3">
+
+                            </Entry>
+
+                        </Border>
+                        
+
+
                     </Grid>
-                    
-                    
+
+
+
+
+
+
+                    <!--Ключ типа List-->
+                    <Grid Grid.Row="0"
+                          Grid.Column="2"
+                          RowSpacing="10"
+                          x:Name="TypeListGrid"
+                          Padding="20,0">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Key review"
+                               FontSize="25"
+                               FontFamily="Roboto"
+                               TextColor="#d2d2d3"
+                               BackgroundColor="#282a30"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start">
+
+                        </Label>
+
+
+                        <Grid Grid.Row="1"
+                              Grid.Column="0"
+                              ColumnSpacing="10">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="Key"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#707382"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#d2d2d3"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   x:Name="ListKeyNameLabel"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+
+
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="3"
+                                   Text="Value type"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#707382"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="4"
+                                   Text="List"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#d2d2d3"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+
+                        </Grid>
+
+                    </Grid>
+
+
+
+
+
+
                 </Grid>
 
             </Border>
