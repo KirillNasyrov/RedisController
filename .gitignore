@@ -2,8 +2,9 @@
 *.user
 _ReSharper.*
 .vs/
-RedisController/.vs
+RedisExplorer/.vs
 .vs
+.idea
 bin
 obj
 packages
