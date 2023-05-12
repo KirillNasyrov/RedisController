@@ -47,7 +47,7 @@ public partial class StartPage
             ConnectionService.Configurations.Find(conf => conf.DatabaseID == selectedConfig.DatabaseID)
                 .UpdateLastTimeConnection();
             TableOfConfigs.ItemsSource = new List<RedisDatabaseConfiguration>(Configs);
-            ConnectionService.UpdateConfigs();
+            ConnectionService.UpdateConfigsAsync();
 
             await Navigation.PushAsync(new RedisDatabasePage(ConnectionService.Connections[selectedConfig.DatabaseID], selectedConfig), false);
         }
@@ -74,7 +74,7 @@ public partial class StartPage
         ConnectionService.Configurations.Remove(currentConfig);
 
         TableOfConfigs.ItemsSource = new List<RedisDatabaseConfiguration>(Configs);
-        ConnectionService.UpdateConfigs();
+        ConnectionService.UpdateConfigsAsync();
     }
 
     private void AddRedisDataBaseButtonClicked(object sender, System.EventArgs e)
@@ -113,7 +113,7 @@ public partial class StartPage
                 await Navigation.PushAsync(new RedisDatabasePage(connection, newConfig), false);
 
                 TableOfConfigs.ItemsSource = new List<RedisDatabaseConfiguration>(Configs);
-                ConnectionService.UpdateConfigs();
+                ConnectionService.UpdateConfigsAsync();
 
 
                 GridOfConfigs.ColumnDefinitions.ElementAt(5).Width = new GridLength(0, GridUnitType.Star);

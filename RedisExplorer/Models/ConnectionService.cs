@@ -14,7 +14,7 @@ public class ConnectionService
     public List<RedisDatabaseConfiguration> Configurations { get; private set; }
     public Dictionary<string, ConnectionMultiplexer> Connections { get; set; }
 
-    private string FileWithCongigs { get; set; }
+    private string FileWithConfigs { get; set; }
 
     public ConnectionService()
     {
@@ -23,17 +23,18 @@ public class ConnectionService
         
         var appDataDirectory = FileSystem.AppDataDirectory;
         var configurationsDirectory = Path.Combine(appDataDirectory, "Configurations");
-        FileWithCongigs = Path.Combine(configurationsDirectory, "configs.json");
+        FileWithConfigs = Path.Combine(configurationsDirectory, "configs.json");
 
-        if (!File.Exists(FileWithCongigs))
+        if (!File.Exists(FileWithConfigs))
         {
             Directory.CreateDirectory(configurationsDirectory);
-            File.Create(FileWithCongigs);
-            UpdateConfigs();
+            var file = File.Create(FileWithConfigs);
+            file.Close();
+            UpdateConfigsAsync();
         }
         else
         {
-            string jsonString = File.ReadAllText(FileWithCongigs);
+            string jsonString = File.ReadAllText(FileWithConfigs);
             Configurations = JsonSerializer.Deserialize<List<RedisDatabaseConfiguration>>(jsonString);
             
         }
@@ -59,9 +60,9 @@ public class ConnectionService
     }
 
 
-    public async void UpdateConfigs()
+    public async void UpdateConfigsAsync()
     {
-        using FileStream createStream = File.Create(FileWithCongigs);
+        using FileStream createStream = File.Create(FileWithConfigs);
         await JsonSerializer.SerializeAsync(createStream, Configurations);
 
     }
