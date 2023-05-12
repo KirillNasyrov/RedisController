@@ -14,6 +14,8 @@ public partial class RedisDatabasePage : ContentPage
     }
     private Dictionary<RedisType, int> TypeGrids { get; set; }
     private Dictionary<RedisType, Label> TypeLabels { get; set; }
+    private Dictionary<RedisType, Editor> TypeEditors { get; set; }
+    private KeyValuePair<RedisKey, RedisType> selectedKey { get; set; }
 
     public RedisDatabasePage(ConnectionMultiplexer connection, RedisDatabaseConfiguration configuration)
 	{
@@ -37,6 +39,11 @@ public partial class RedisDatabasePage : ContentPage
             {RedisType.List, ListKeyNameLabel }
         };
 
+        TypeEditors = new Dictionary<RedisType, Editor>()
+        {
+            {RedisType.String, StringValueEditor },
+        };
+
         BindingContext = this;
 	}
 
@@ -54,22 +61,92 @@ public partial class RedisDatabasePage : ContentPage
 
         try
         {
-            var selectedKey = (KeyValuePair<RedisKey, RedisType>)TableOfKeys.SelectedItem;
+            selectedKey = (KeyValuePair<RedisKey, RedisType>)TableOfKeys.SelectedItem;
             foreach (var column in TypeGrid.ColumnDefinitions)
             {
                 column.Width = new GridLength(0, GridUnitType.Star);
             }
             TypeGrid.ColumnDefinitions.ElementAt(TypeGrids[selectedKey.Value]).Width = new GridLength(1, GridUnitType.Star);
             TypeLabels[selectedKey.Value].Text = selectedKey.Key;
-            StringValueEntry.Text = await RedisDatabase.StringGetAsync(selectedKey.Key);
+            TypeEditors[selectedKey.Value].Text = await RedisDatabase.StringGetAsync(selectedKey.Key);
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
         }
         catch (Exception)
         {
-            await DisplayAlert("Error", "Database is not connected", "OK");
+            await DisplayAlert("Error", "Can not select the key", "OK");
         }
         finally
         {
             TableOfKeys.SelectedItem = null;
         }
+    }
+
+    private void EditValueButtonClicked(object sender, EventArgs e)
+    {
+        GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 45;
+        TypeEditors[selectedKey.Value].IsReadOnly = false;
+    }
+
+    public async void SaveChangesButtonClickedAsync(object sender, EventArgs e)
+    {
+        var deletingKey = selectedKey.Key;
+        try
+        {
+            await RedisDatabase.StringSetValueAsync(deletingKey, StringValueEditor.Text);
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Can not edit the key", "OK");
+        }
+        finally
+        {
+            GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 0;
+            TypeEditors[selectedKey.Value].IsReadOnly = true;
+        }
+    }
+
+    public void CancelEditingDataBaseButtonClicked(object sender, EventArgs e)
+    {
+        GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 0;
+        foreach (var column in TypeGrid.ColumnDefinitions)
+        {
+            column.Width = new GridLength(0, GridUnitType.Star);
+        }
+        TypeGrid.ColumnDefinitions.ElementAt(0).Width = new GridLength(1, GridUnitType.Star);
+    }
+
+    public async void DeleteKeyButtonClickedAsync(object sender, EventArgs e)
+    {
+        var deletingKey = selectedKey.Key;
+        try
+        {
+            await RedisDatabase.DeleteKeyAsync(deletingKey);
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Can not delete the key", "OK");
+        }
+        finally
+        {
+            TableOfKeys.ItemsSource = new Dictionary<RedisKey, RedisType>(KeyTypePairs);
+            GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 0;
+            foreach (var column in TypeGrid.ColumnDefinitions)
+            {
+                column.Width = new GridLength(0, GridUnitType.Star);
+            }
+            TypeGrid.ColumnDefinitions.ElementAt(0).Width = new GridLength(1, GridUnitType.Star);
+        }
+        
     }
 }

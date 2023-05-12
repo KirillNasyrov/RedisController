@@ -37,7 +37,35 @@ public class RedisDatabase
 
     public async Task<RedisValue> StringGetAsync(RedisKey key)
     {
-        return await Database.StringGetAsync(key);
+        if (Server.IsConnected)
+        {
+            return await Database.StringGetAsync(key);
+        }
+        throw new InvalidOperationException("Server is not connected");
+    }
+
+    public async Task DeleteKeyAsync(RedisKey key)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.KeyDeleteAsync(key);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
+    public async Task StringSetValueAsync(RedisKey key, RedisValue value)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.StringSetAsync(key, value);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
     }
 
 }

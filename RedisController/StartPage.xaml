@@ -418,11 +418,10 @@
 
                                     <ImageButton Source="delete.png"
                                                  Grid.Column="4"
-                                                 Margin="0,0,0,0"
                                                  VerticalOptions="Center"
                                                  HorizontalOptions="Start"
                                                  BackgroundColor="#282a30"
-                                                 Padding="5"
+                                                 Padding="18"
                                                  Clicked="RedisConfigurationRemoved"
                                                  CommandParameter="{Binding .}">
 
