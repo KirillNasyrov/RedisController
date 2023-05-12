@@ -60,7 +60,7 @@ public class ConnectionService
     }
 
 
-    public async void UpdateConfigsAsync()
+    public async Task UpdateConfigsAsync()
     {
         using FileStream createStream = File.Create(FileWithConfigs);
         await JsonSerializer.SerializeAsync(createStream, Configurations);
