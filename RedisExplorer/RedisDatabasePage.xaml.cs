@@ -112,7 +112,7 @@ public partial class RedisDatabasePage : ContentPage
         }
     }
 
-    public void CancelEditingDataBaseButtonClicked(object sender, EventArgs e)
+    private void CancelEditingOrAddingKeyButtonClicked(object sender, EventArgs e)
     {
         GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 0;
         foreach (var column in TypeGrid.ColumnDefinitions)
@@ -147,6 +147,47 @@ public partial class RedisDatabasePage : ContentPage
             }
             TypeGrid.ColumnDefinitions.ElementAt(0).Width = new GridLength(1, GridUnitType.Star);
         }
+        
+    }
+
+    private void AddNewKeyButtonClicked(object sender, EventArgs e)
+    {
+        foreach (var column in TypeGrid.ColumnDefinitions)
+        {
+            column.Width = new GridLength(0, GridUnitType.Star);
+        }
+        TypeGrid.ColumnDefinitions.ElementAt(5).Width = new GridLength(1, GridUnitType.Star);
+    }
+
+    private async void ApplyAddingNewKeyButtonClickedAsync(object sender, EventArgs e)
+    {
+        try
+        {
+            var type = TypeOfAddingKeyPicker.SelectedItem;
+
+            var key = NameOfAddingKeyEntry.Text;
+            await RedisDatabase.StringSetValueAsync(key, StringValyeOfAddingKeyEditor.Text);
+            
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Can not edit the key", "OK");
+        }
+        finally
+        {
+            TableOfKeys.ItemsSource = new Dictionary<RedisKey, RedisType>(KeyTypePairs);
+            foreach (var column in TypeGrid.ColumnDefinitions)
+            {
+                column.Width = new GridLength(0, GridUnitType.Star);
+            }
+            TypeGrid.ColumnDefinitions.ElementAt(0).Width = new GridLength(1, GridUnitType.Star);
+        }
+
+
         
     }
 }

@@ -275,7 +275,8 @@
                             <Button Text="+ Key"
                                     FontSize="15"
                                     FontFamily="Roboto"
-                                    TextColor="#1f1f23">
+                                    TextColor="#1f1f23"
+                                    Clicked="AddNewKeyButtonClicked">
                                 <Button.Background>
                                     <LinearGradientBrush>
                                         <GradientStop Color="#21ecac"
@@ -664,7 +665,7 @@
                                             FontSize="15"
                                             BackgroundColor="#393c46"
                                             TextColor="#d2d2d3"
-                                            Clicked="CancelEditingDataBaseButtonClicked"
+                                            Clicked="CancelEditingOrAddingKeyButtonClicked"
                                             WidthRequest="100">
 
                                     </Button>
@@ -833,6 +834,304 @@
 
 
                         </Grid>
+
+                    </Grid>
+
+
+
+
+
+
+
+
+
+                    <!--Область добавления ключа-->
+                    <Grid Grid.Row="0"
+                          Grid.Column="5"
+                          RowSpacing="10"
+                          x:Name="AddNewKeyGrid"
+                          Padding="20,0">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="85" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Adding new Key"
+                               FontSize="25"
+                               FontFamily="Roboto"
+                               TextColor="#d2d2d3"
+                               BackgroundColor="#282a30"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start">
+
+                        </Label>
+
+
+                        <Grid Grid.Row="1"
+                              Grid.Column="0"
+                              RowSpacing="2">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   HorizontalTextAlignment="Start"
+                                   Text="Key Type*"
+                                   FontFamily="Roboto"
+                                   FontSize="12"
+                                   TextColor="#d2d2d3"
+                                   Padding="15,0,0,0">
+
+                            </Label>
+
+                            <Border Grid.Row="1"
+                                    Grid.Column="0"
+                                    StrokeThickness="0"
+                                    HeightRequest="45"
+                                    VerticalOptions="End">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20" />
+                                </Border.StrokeShape>
+
+
+                                <Picker WidthRequest="120"
+                                        x:Name="TypeOfAddingKeyPicker"
+                                        BackgroundColor="#393c46"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center"
+                                        TextColor="#d2d2d3"
+                                        FontFamily="Roboto"
+                                        HeightRequest="45">
+
+                                    <Picker.Items>
+                                        <x:String>String</x:String>
+                                        <x:String>List</x:String>
+                                        <x:String>Set</x:String>
+                                        <x:String>Hash</x:String>
+                                        <x:String>Stream</x:String>
+                                    </Picker.Items>
+                                    
+                                    <Picker.SelectedIndex>
+                                        0
+                                    </Picker.SelectedIndex>
+
+                                </Picker>
+
+                            </Border>
+
+
+                        </Grid>
+
+
+
+
+                        <Grid Grid.Row="2"
+                              Grid.Column="0"
+                              RowSpacing="2"
+                              Margin="0,20,0,0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   HorizontalTextAlignment="Start"
+                                   Text="Key Name*"
+                                   FontFamily="Roboto"
+                                   FontSize="12"
+                                   TextColor="#d2d2d3"
+                                   Padding="15,0,0,0">
+
+                            </Label>
+
+                            <Border Grid.Row="1"
+                                    Grid.Column="0"
+                                    StrokeThickness="0"
+                                    HeightRequest="45"
+                                    VerticalOptions="End">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20" />
+                                </Border.StrokeShape>
+
+
+                                <Entry Placeholder="Enter Key Name"
+                                       PlaceholderColor="#707382"
+                                       BackgroundColor="#393c46"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Start"
+                                       TextColor="#d2d2d3"
+                                       FontFamily="Roboto"
+                                       HeightRequest="45"
+                                       x:Name="NameOfAddingKeyEntry">
+
+
+                                </Entry>
+
+                            </Border>
+
+
+                        </Grid>
+
+
+
+                        <Grid Grid.Row="3"
+                              Grid.Column="0"
+                              Margin="0,20"
+                              x:Name="ValueOfNewKeyGrid">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0*" />
+                                <ColumnDefinition Width="0*" />
+                                <ColumnDefinition Width="0*" />
+                                <ColumnDefinition Width="0*" />
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <Border Grid.Row="0"
+                                    Grid.Column="0"
+                                    StrokeThickness="0">
+
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20" />
+                                </Border.StrokeShape>
+
+
+
+                                <Editor Placeholder="Enter Value"
+                                        PlaceholderColor="#707382"
+                                        BackgroundColor="#393c46"
+                                        HorizontalTextAlignment="Start"
+                                        VerticalTextAlignment="Start"
+                                        FontFamily="Roboto"
+                                        TextColor="#d2d2d3"
+                                        AutoSize="TextChanges"
+                                        IsSpellCheckEnabled="False"
+                                        x:Name="StringValyeOfAddingKeyEditor">
+
+                                </Editor>
+
+                            </Border>
+
+
+
+                            <Grid Grid.Row="1"
+                                  Grid.Column="0"
+                                  VerticalOptions="End"
+                                  ColumnSpacing="10">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="45" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Grid.Row="0"
+                                        Grid.Column="1"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="End">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+                                    <Button Text="Cancel"
+                                            FontFamily="Roboto"
+                                            FontSize="15"
+                                            BackgroundColor="#393c46"
+                                            TextColor="#d2d2d3"
+                                            WidthRequest="100"
+                                            Clicked="CancelEditingOrAddingKeyButtonClicked">
+
+                                    </Button>
+
+
+                                </Border>
+
+
+
+
+
+                                <Border Grid.Row="0"
+                                        Grid.Column="2"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="EndAndExpand">
+
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+
+                                    <Button Text="Add"
+                                            FontFamily="Roboto"
+                                            FontSize="15"
+                                            TextColor="#1f1f23"
+                                            WidthRequest="100"
+                                            Clicked="ApplyAddingNewKeyButtonClickedAsync">
+
+                                        <Button.Background>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#21ecac"
+                                                          Offset="0.1" />
+                                                <GradientStop Color="#1ecbe4"
+                                                          Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Button.Background>
+
+                                    </Button>
+
+                                </Border>
+
+                            </Grid>
+
+
+                        </Grid>
+
+
+
+
+
 
                     </Grid>
 

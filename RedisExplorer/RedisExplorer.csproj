@@ -7,16 +7,16 @@
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
-		<RootNamespace>RedisController</RootNamespace>
+		<RootNamespace>RedisExplorer</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>RedisController</ApplicationTitle>
+		<ApplicationTitle>RedisExplorer</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.rediscontroller</ApplicationId>
+		<ApplicationId>com.companyname.redisexplorer</ApplicationId>
 		<ApplicationIdGuid>d4c1630f-285a-467b-8fcf-622c00823945</ApplicationIdGuid>
 
 		<!-- Versions -->
