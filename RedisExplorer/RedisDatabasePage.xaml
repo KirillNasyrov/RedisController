@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RedisController.RedisDatabasePage"
+             x:Class="RedisExplorer.RedisDatabasePage"
              Title="RedisDatabasePage"
              Shell.NavBarIsVisible="False">
 
@@ -445,12 +444,12 @@
                                TextColor="#707382"
                                VerticalTextAlignment="Center"
                                HorizontalTextAlignment="Center">
-                            
+
                         </Label>
 
                     </Grid>
-                    
-                    
+
+
 
                     <!--Ключ типа string-->
                     <Grid Grid.Row="0"
@@ -494,14 +493,14 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="auto" />
-                                
+
                                 <ColumnDefinition Width="*" />
-                                
+
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="auto" />
-                                
+
                                 <ColumnDefinition Width="10*" />
-                                
+
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
@@ -715,7 +714,7 @@
 
 
 
-                        
+
 
 
                     </Grid>
@@ -929,7 +928,7 @@
                                         <x:String>Hash</x:String>
                                         <x:String>Stream</x:String>
                                     </Picker.Items>
-                                    
+
                                     <Picker.SelectedIndex>
                                         0
                                     </Picker.SelectedIndex>
@@ -1149,4 +1148,8 @@
 
 
     </Grid>
+
+
+
+
 </ContentPage>

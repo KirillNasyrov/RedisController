@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace RedisController.Models;
+namespace RedisExplorer.Models;
 public class RedisDatabaseConfiguration
 {
     public string DatabaseID { get; set; }

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StackExchange.Redis;
+﻿using StackExchange.Redis;
 using System.Text.Json;
-using Microsoft.Maui.Storage;
 
-namespace RedisController.Models;
+namespace RedisExplorer.Models;
 
 public class ConnectionService
 {
@@ -60,7 +54,7 @@ public class ConnectionService
     }
 
 
-    public async Task UpdateConfigsAsync()
+    public async void UpdateConfigsAsync()
     {
         using FileStream createStream = File.Create(FileWithConfigs);
         await JsonSerializer.SerializeAsync(createStream, Configurations);

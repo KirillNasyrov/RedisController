@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace RedisController;
+namespace RedisExplorer;
 
 class Program : MauiApplication
 {

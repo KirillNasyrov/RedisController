@@ -1,14 +1,10 @@
-using RedisController.Models;
-using System.Security.AccessControl;
-using StackExchange.Redis;
-using System.Windows.Input;
-using System;
+namespace RedisExplorer;
 
-namespace RedisController;
+using RedisExplorer.Models;
 
 public partial class StartPage
 {
-	public List<RedisDatabaseConfiguration> Configs 
+    public List<RedisDatabaseConfiguration> Configs
     {
         get => ConnectionService.Configurations;
     }
@@ -123,7 +119,7 @@ public partial class StartPage
                 ConnectionService.Configurations.Remove(newConfig);
                 await DisplayAlert("Error", ex.Message, "OK");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ConnectionService.Configurations.Remove(newConfig);
                 await DisplayAlert("Error", "Can not connect to database", "OK");

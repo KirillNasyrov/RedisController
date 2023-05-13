@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace RedisController;
+namespace RedisExplorer;
 
 [Application]
 public class MainApplication : MauiApplication

@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace RedisController;
+namespace RedisExplorer;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

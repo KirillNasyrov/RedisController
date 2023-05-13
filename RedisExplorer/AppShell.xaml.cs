@@ -1,4 +1,4 @@
-﻿namespace RedisController;
+﻿namespace RedisExplorer;
 
 public partial class AppShell : Shell
 {

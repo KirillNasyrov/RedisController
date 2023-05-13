@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace RedisController;
+namespace RedisExplorer;
 
 public class Program
 {

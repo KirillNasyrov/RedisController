@@ -1,14 +1,14 @@
-using RedisController.Models;
+using RedisExplorer.Models;
 using StackExchange.Redis;
 
-namespace RedisController;
+namespace RedisExplorer;
 
 public partial class RedisDatabasePage : ContentPage
 {
     public ConnectionService ConnectionService { get; private set; }
-	public RedisDatabase RedisDatabase { get; private set; }
+    public RedisDatabase RedisDatabase { get; private set; }
     private RedisDatabaseConfiguration Configuration { get; set; }
-	public Dictionary<RedisKey,RedisType> KeyTypePairs
+    public Dictionary<RedisKey, RedisType> KeyTypePairs
     {
         get => RedisDatabase.GetRedisKeys().ToDictionary(key => key, key => RedisDatabase.GetKeyType(key));
     }
@@ -18,7 +18,7 @@ public partial class RedisDatabasePage : ContentPage
     private KeyValuePair<RedisKey, RedisType> selectedKey { get; set; }
 
     public RedisDatabasePage(ConnectionMultiplexer connection, RedisDatabaseConfiguration configuration)
-	{
+    {
         TypeGrids = new Dictionary<RedisType, int>()
         {
             {RedisType.String, 1 },
@@ -27,8 +27,8 @@ public partial class RedisDatabasePage : ContentPage
             {RedisType.Hash, 4 },
             {RedisType.Stream, 5 }
         };
-		RedisDatabase = new RedisDatabase(connection, configuration);
-		Configuration = configuration;
+        RedisDatabase = new RedisDatabase(connection, configuration);
+        Configuration = configuration;
         InitializeComponent();
 
         DatabaseNameEnrty.Text = Configuration.DatabaseID;
@@ -45,15 +45,15 @@ public partial class RedisDatabasePage : ContentPage
         };
 
         BindingContext = this;
-	}
+    }
 
-	private async void BackButtonClicked(object sender, EventArgs e)
-	{
-		await Navigation.PopAsync(false);
-	}
+    private async void BackButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync(false);
+    }
 
-	private async void RedisKeySelectedAsync(object sender, SelectionChangedEventArgs e)
-	{
+    private async void RedisKeySelectedAsync(object sender, SelectionChangedEventArgs e)
+    {
         if (TableOfKeys.SelectedItem == null)
         {
             return;
@@ -147,7 +147,7 @@ public partial class RedisDatabasePage : ContentPage
             }
             TypeGrid.ColumnDefinitions.ElementAt(0).Width = new GridLength(1, GridUnitType.Star);
         }
-        
+
     }
 
     private void AddNewKeyButtonClicked(object sender, EventArgs e)
@@ -167,7 +167,7 @@ public partial class RedisDatabasePage : ContentPage
 
             var key = NameOfAddingKeyEntry.Text;
             await RedisDatabase.StringSetValueAsync(key, StringValyeOfAddingKeyEditor.Text);
-            
+
         }
         catch (InvalidOperationException ex)
         {
@@ -188,6 +188,6 @@ public partial class RedisDatabasePage : ContentPage
         }
 
 
-        
+
     }
 }
