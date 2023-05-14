@@ -66,5 +66,24 @@ public class RedisDatabase
         }
     }
 
+    public async Task<List<Tuple<int, RedisValue>>> ListGetAsync(RedisKey key)
+    {
+        if (Server.IsConnected)
+        {
+            var length = (int)(await Database.ListLengthAsync(key));
+            var list = new List<Tuple<int, RedisValue>> (length);
+
+            for (int i = 0; i < length; ++i)
+            {
+                list.Add(new Tuple<int, RedisValue>(i, Database.ListGetByIndex(key, i)));
+            }
+            return list;
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
 }
 

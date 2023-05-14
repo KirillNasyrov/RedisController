@@ -68,7 +68,15 @@ public partial class RedisDatabasePage : ContentPage
             }
             TypeGrid.ColumnDefinitions.ElementAt(TypeGrids[selectedKey.Value]).Width = new GridLength(1, GridUnitType.Star);
             TypeLabels[selectedKey.Value].Text = selectedKey.Key;
-            TypeEditors[selectedKey.Value].Text = await RedisDatabase.StringGetAsync(selectedKey.Key);
+            if (selectedKey.Value == RedisType.String)
+            {
+                StringValueEditor.Text = await RedisDatabase.StringGetAsync(selectedKey.Key);
+            }
+            if (selectedKey.Value == RedisType.List)
+            {
+                var list = await RedisDatabase.ListGetAsync(selectedKey.Key);
+                ListValueCollectionView.ItemsSource = await RedisDatabase.ListGetAsync(selectedKey.Key);
+            }
         }
         catch (InvalidOperationException ex)
         {
