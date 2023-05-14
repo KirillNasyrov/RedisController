@@ -36,7 +36,8 @@ public partial class RedisDatabasePage : ContentPage
         TypeLabels = new Dictionary<RedisType, Label>()
         {
             {RedisType.String, StringKeyNameLabel },
-            {RedisType.List, ListKeyNameLabel }
+            {RedisType.List, ListKeyNameLabel },
+            {RedisType.Set, SetKeyNameLabel },
         };
 
         TypeEditors = new Dictionary<RedisType, Editor>()
@@ -76,6 +77,11 @@ public partial class RedisDatabasePage : ContentPage
             {
                 var list = await RedisDatabase.ListGetAsync(selectedKey.Key);
                 ListValueCollectionView.ItemsSource = await RedisDatabase.ListGetAsync(selectedKey.Key);
+            }
+            if (selectedKey.Value == RedisType.Set)
+            {
+                var set = await RedisDatabase.SetGetAsync(selectedKey.Key);
+                SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(selectedKey.Key);
             }
         }
         catch (InvalidOperationException ex)

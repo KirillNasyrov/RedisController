@@ -1018,6 +1018,328 @@
                     </Grid>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!--Ключ типа Set-->
+                    <Grid Grid.Row="0"
+                          Grid.Column="3"
+                          RowSpacing="10"
+                          x:Name="TypeSetGrid"
+                          Padding="20,0">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Key review"
+                               FontSize="25"
+                               FontFamily="Roboto"
+                               TextColor="#d2d2d3"
+                               BackgroundColor="#282a30"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start">
+
+                        </Label>
+
+
+                        <Grid Grid.Row="1"
+                              Grid.Column="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+
+                                <ColumnDefinition Width="*" />
+
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+
+
+                            <Border Grid.Row="0"
+                                    Grid.Column="0"
+                                    HeightRequest="45"
+                                    StrokeThickness="0"
+                                    VerticalOptions="End">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10" />
+                                </Border.StrokeShape>
+
+                                <Label Padding="15,0"
+                                       Text="Set"
+                                       FontSize="20"
+                                       FontFamily="Roboto"
+                                       TextColor="#d2d2d3"
+                                       BackgroundColor="#6703e1"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Start"
+                                       HeightRequest="45">
+
+                                </Label>
+
+                            </Border>
+
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Margin="10,0,0,0"
+                                   FontSize="20"
+                                   FontFamily="Roboto"
+                                   TextColor="#d2d2d3"
+                                   BackgroundColor="#282a30"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"
+                                   x:Name="SetKeyNameLabel"
+                                   VerticalOptions="End"
+                                   HeightRequest="45">
+
+                            </Label>
+
+
+                            <ImageButton Grid.Row="0"
+                                         Grid.Column="4"
+                                         Source="delete.png"
+                                         Padding="20,30,20,10"
+                                         VerticalOptions="End"
+                                         BackgroundColor="#282a30"
+                                         Clicked="DeleteKeyButtonClickedAsync">
+
+                            </ImageButton>
+
+
+                        </Grid>
+
+
+                        <Grid Grid.Row="2"
+                              Grid.Column="0"
+                              Margin="0,20">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="7*" />
+                                <RowDefinition Height="3*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+
+                            <!--Таблица для отображения Set-->
+                            <Grid BackgroundColor="#282a30"
+                                  Grid.Row="0"
+                                  Grid.Column="0"
+                                  x:Name="SetValueGrid">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Margin="30,0,0,0"
+                                       FontSize="12"
+                                       TextColor="#707382"
+                                       Text="Member"
+                                       FontFamily="Roboto"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start">
+
+                                </Label>
+
+
+                                <CollectionView x:Name="SetValueCollectionView"
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                SelectionMode="Single">
+
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical"
+                                                           ItemSpacing="0" />
+                                    </CollectionView.ItemsLayout>
+
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BackgroundColor="#393c46"
+                                                    StrokeThickness="0">
+
+
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup Name="CommonStates">
+
+                                                        <VisualState Name="Normal">
+                                                        </VisualState>
+
+
+                                                        <VisualState Name="PointerOver">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="Stroke" Value="#29e3cf"></Setter>
+                                                                <Setter Property="StrokeThickness" Value="1"></Setter>
+                                                                <Setter Property="Margin" Value="1"></Setter>
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+
+
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
+
+
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="20" />
+                                                </Border.StrokeShape>
+
+                                                <Grid>
+
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="33" />
+
+                                                    </Grid.RowDefinitions>
+
+                                                    <Grid.ColumnDefinitions>
+
+                                                        <ColumnDefinition Width="*" />
+
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Label Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           Margin="30,0,0,0"
+                                                           Text="{Binding }"
+                                                           FontSize="13"
+                                                           TextColor="#d2d2d3"
+                                                           FontFamily="Roboto"
+                                                           VerticalOptions="Center"
+                                                           HorizontalOptions="Start">
+
+                                                    </Label>
+
+
+                                                </Grid>
+
+
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+
+                                </CollectionView>
+
+
+
+                            </Grid>
+
+
+                            <!--кнопки для закрытия и сохранения-->
+                            <Grid Grid.Row="1"
+                                  Grid.Column="0"
+                                  VerticalOptions="End"
+                                  ColumnSpacing="10"
+                                  x:Name="GridWithCancelEditButtonsForSetKey">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Border Grid.Row="0"
+                                        Grid.Column="1"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="End">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+                                    <Button Text="Cancel"
+                                            FontFamily="Roboto"
+                                            FontSize="15"
+                                            BackgroundColor="#393c46"
+                                            TextColor="#d2d2d3"
+                                            Clicked="CancelEditingOrAddingKeyButtonClicked"
+                                            WidthRequest="100">
+
+                                    </Button>
+
+
+                                </Border>
+
+
+                                <Border Grid.Row="0"
+                                        Grid.Column="2"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="EndAndExpand">
+
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+
+                                    <Button Text="Edit"
+                                            FontFamily="Roboto"
+                                            FontSize="15"
+                                            TextColor="#1f1f23"
+                                            Clicked="SaveChangesButtonClickedAsync"
+                                            WidthRequest="100">
+
+                                        <Button.Background>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#21ecac"
+                                                              Offset="0.1" />
+                                                <GradientStop Color="#1ecbe4"
+                                                              Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Button.Background>
+
+                                    </Button>
+
+                                </Border>
+
+                            </Grid>
+
+
+                        </Grid>
+
+                    </Grid>
+
+
                     <!--Область добавления ключа-->
                     <Grid Grid.Row="0"
                           Grid.Column="5"
