@@ -275,10 +275,76 @@ public partial class RedisDatabasePage : ContentPage
         }
         finally
         {
-            //TableOfKeys.ItemsSource = new Dictionary<RedisKey, RedisType>(KeyTypePairs);
-            
-
             EditingListKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
+        }
+    }
+
+
+
+
+
+
+    private void AddElementToSetButtonClicked(object sender, EventArgs e)
+    {
+        EditingSetKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
+
+        EditingSetKeyGrid.RowDefinitions.ElementAt(0).Height = 100;
+    }
+
+
+    private async void ApplyAddingMemberToSetButtonClickedAsync(object sender, EventArgs e)
+    {
+        var key = SelectedKey.Key;
+        try
+        {
+            var value = GettingNewMemberForSetEntry.Text;
+            await RedisDatabase.SetAddAsync(key, value);
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Error while adding member", "OK");
+        }
+        finally
+        {
+            SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(SelectedKey.Key);
+            EditingSetKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+        }
+    }
+
+
+
+
+    private void RemoveElementFromSetButtonClicked(object sender, EventArgs e)
+    {
+        EditingSetKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+
+        EditingSetKeyGrid.RowDefinitions.ElementAt(1).Height = 100;
+    }
+
+    private async void ApplyRemovalMemberFromSetButtonClickedAsync(object sender, EventArgs e)
+    {
+        var key = SelectedKey.Key;
+        try
+        {
+            var value = GettingRemovingMemberFromSetEntry.Text;
+            await RedisDatabase.SetRemoveAsync(key, value);
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Error while removing member", "OK");
+        }
+        finally
+        {
+            SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(SelectedKey.Key);
+            EditingSetKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
         }
     }
 }

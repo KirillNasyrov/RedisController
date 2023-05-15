@@ -149,5 +149,30 @@ public class RedisDatabase
         }
     }
 
+
+    public async Task SetRemoveAsync(RedisKey key, RedisValue value)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.SetRemoveAsync(key, value);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
+    public async Task SetAddAsync(RedisKey key, RedisValue value)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.SetAddAsync(key, value);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
 }
 

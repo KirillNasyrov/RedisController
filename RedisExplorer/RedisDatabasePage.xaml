@@ -969,6 +969,7 @@
 
 
 
+                            <!--область редактирования ключа List-->
                             <Grid Grid.Row="1"
                                   Grid.Column="0"
                                   VerticalOptions="End"
@@ -1001,6 +1002,7 @@
 
 
 
+                                    <!--выбор куда добавлять элемент в List-->
                                     <Grid Grid.Row="0"
                                           Grid.Column="0">
 
@@ -1049,7 +1051,6 @@
 
 
                                     </Grid>
-
 
 
 
@@ -1147,7 +1148,7 @@
 
 
 
-
+                                
                                 <Grid Grid.Row="1"
                                       Grid.Column="0"
                                       RowSpacing="10">
@@ -1162,6 +1163,7 @@
                                     </Grid.ColumnDefinitions>
 
 
+                                    <!--выбор откуда удалять определённое количество элементов из List-->
                                     <Grid Grid.Row="0"
                                           Grid.Column="0">
 
@@ -1376,6 +1378,7 @@
 
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
 
 
@@ -1427,13 +1430,27 @@
                                          HeightRequest="20"
                                          Padding="8"
                                          VerticalOptions="End"
-                                         BackgroundColor="#282a30">
+                                         BackgroundColor="#282a30"
+                                         Clicked="AddElementToSetButtonClicked">
 
                             </ImageButton>
 
 
                             <ImageButton Grid.Row="0"
                                          Grid.Column="4"
+                                         Source="minus.png"
+                                         WidthRequest="20"
+                                         HeightRequest="20"
+                                         Padding="8"
+                                         VerticalOptions="End"
+                                         BackgroundColor="#282a30"
+                                         Clicked="RemoveElementFromSetButtonClicked">
+
+                            </ImageButton>
+
+
+                            <ImageButton Grid.Row="0"
+                                         Grid.Column="5"
                                          Source="delete.png"
                                          WidthRequest="20"
                                          HeightRequest="20"
@@ -1453,8 +1470,8 @@
                               Margin="0,20">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="7*" />
-                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -1571,77 +1588,282 @@
                             </Grid>
 
 
-                            <!--кнопки для закрытия и сохранения-->
+                            <!--область редактирования ключа Set-->
                             <Grid Grid.Row="1"
                                   Grid.Column="0"
                                   VerticalOptions="End"
-                                  ColumnSpacing="10"
-                                  x:Name="GridWithCancelEditButtonsForSetKey">
+                                  x:Name="EditingSetKeyGrid">
 
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="0" />
                                     <RowDefinition Height="0" />
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
 
-                                <Border Grid.Row="0"
-                                        Grid.Column="1"
-                                        StrokeThickness="0"
-                                        HorizontalOptions="End">
 
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="20" />
-                                    </Border.StrokeShape>
+                                <!--область добавления элемента в Set-->
+                                <Grid Grid.Row="0"
+                                      Grid.Column="0"
+                                      RowSpacing="10">
 
-                                    <Button Text="Cancel"
-                                            FontFamily="Roboto"
-                                            FontSize="15"
-                                            BackgroundColor="#393c46"
-                                            TextColor="#d2d2d3"
-                                            Clicked="CancelEditingOrAddingKeyButtonClicked"
-                                            WidthRequest="100">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
 
-                                    </Button>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
 
-                                </Border>
+
+                                    <!--ввод элмента в Set-->
+                                    <Grid Grid.Row="0"
+                                          Grid.Column="0">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
 
-                                <Border Grid.Row="0"
-                                        Grid.Column="2"
-                                        StrokeThickness="0"
-                                        HorizontalOptions="EndAndExpand">
+                                        <Entry Grid.Row="0"
+                                               Grid.Column="0"
+                                               BackgroundColor="#393c46"
+                                               Placeholder="Enter Member"
+                                               FontFamily="Roboto"
+                                               FontSize="15"
+                                               PlaceholderColor="#767a87"
+                                               TextColor="#d2d2d3"
+                                               x:Name="GettingNewMemberForSetEntry"
+                                               HeightRequest="45">
+
+                                        </Entry>
 
 
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="20" />
-                                    </Border.StrokeShape>
+                                    </Grid>
 
 
-                                    <Button Text="Edit"
-                                            FontFamily="Roboto"
-                                            FontSize="15"
-                                            TextColor="#1f1f23"
-                                            Clicked="SaveChangesButtonClickedAsync"
-                                            WidthRequest="100">
 
-                                        <Button.Background>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="#21ecac"
+
+
+                                    <!--кнопки для закрытия и добавления элемента в Set-->
+                                    <Grid Grid.Row="1"
+                                          Grid.Column="0"
+                                          VerticalOptions="End"
+                                          ColumnSpacing="10">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+
+
+
+
+                                        <Border Grid.Row="0"
+                                                Grid.Column="1"
+                                                StrokeThickness="0"
+                                                HorizontalOptions="End">
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="20" />
+                                            </Border.StrokeShape>
+
+                                            <Button Text="Cancel"
+                                                    FontFamily="Roboto"
+                                                    FontSize="15"
+                                                    BackgroundColor="#393c46"
+                                                    TextColor="#d2d2d3"
+                                                    Clicked="CancelEditingOrAddingKeyButtonClicked"
+                                                    WidthRequest="100">
+
+                                            </Button>
+
+
+                                        </Border>
+
+
+                                        <Border Grid.Row="0"
+                                                Grid.Column="2"
+                                                StrokeThickness="0"
+                                                HorizontalOptions="EndAndExpand">
+
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="20" />
+                                            </Border.StrokeShape>
+
+
+                                            <Button Text="Add"
+                                                    FontFamily="Roboto"
+                                                    FontSize="15"
+                                                    TextColor="#1f1f23"
+                                                    Clicked="ApplyAddingMemberToSetButtonClickedAsync"
+                                                    WidthRequest="100">
+
+                                                <Button.Background>
+                                                    <LinearGradientBrush>
+                                                        <GradientStop Color="#21ecac"
                                                               Offset="0.1" />
-                                                <GradientStop Color="#1ecbe4"
+                                                        <GradientStop Color="#1ecbe4"
                                                               Offset="1.0" />
-                                            </LinearGradientBrush>
-                                        </Button.Background>
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
 
-                                    </Button>
+                                            </Button>
 
-                                </Border>
+                                        </Border>
+
+                                    </Grid>
+
+
+                                </Grid>
+
+
+
+
+
+
+                                <!--область удаления элемента из Set-->
+                                <Grid Grid.Row="1"
+                                      Grid.Column="0"
+                                      RowSpacing="10">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+
+
+                                    <!--ввод удаляемого элмента из Set-->
+                                    <Grid Grid.Row="0"
+                                          Grid.Column="0">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <Entry Grid.Row="0"
+                                               Grid.Column="0"
+                                               BackgroundColor="#393c46"
+                                               Placeholder="Enter Member"
+                                               FontFamily="Roboto"
+                                               FontSize="15"
+                                               PlaceholderColor="#767a87"
+                                               TextColor="#d2d2d3"
+                                               x:Name="GettingRemovingMemberFromSetEntry">
+
+                                        </Entry>
+
+
+                                    </Grid>
+
+
+
+
+
+                                    <!--кнопки для закрытия и удаления элемента из Set-->
+                                    <Grid Grid.Row="1"
+                                          Grid.Column="0"
+                                          VerticalOptions="End"
+                                          ColumnSpacing="10">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+
+
+
+
+                                        <Border Grid.Row="0"
+                                                Grid.Column="1"
+                                                StrokeThickness="0"
+                                                HorizontalOptions="End">
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="20" />
+                                            </Border.StrokeShape>
+
+                                            <Button Text="Cancel"
+                                                    FontFamily="Roboto"
+                                                    FontSize="15"
+                                                    BackgroundColor="#393c46"
+                                                    TextColor="#d2d2d3"
+                                                    Clicked="CancelEditingOrAddingKeyButtonClicked"
+                                                    WidthRequest="100">
+
+                                            </Button>
+
+
+                                        </Border>
+
+
+                                        <Border Grid.Row="0"
+                                                Grid.Column="2"
+                                                StrokeThickness="0"
+                                                HorizontalOptions="EndAndExpand">
+
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="20" />
+                                            </Border.StrokeShape>
+
+
+                                            <Button Text="Remove"
+                                                    FontFamily="Roboto"
+                                                    FontSize="15"
+                                                    TextColor="#1f1f23"
+                                                    Clicked="ApplyRemovalMemberFromSetButtonClickedAsync"
+                                                    WidthRequest="100">
+
+                                                <Button.Background>
+                                                    <LinearGradientBrush>
+                                                        <GradientStop Color="#21ecac"
+                                                              Offset="0.1" />
+                                                        <GradientStop Color="#1ecbe4"
+                                                              Offset="1.0" />
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+
+                                            </Button>
+
+                                        </Border>
+
+                                    </Grid>
+
+
+                                </Grid>
+
+
 
                             </Grid>
 
