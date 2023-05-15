@@ -15,7 +15,7 @@ public partial class RedisDatabasePage : ContentPage
     private Dictionary<RedisType, int> TypeGrids { get; set; }
     private Dictionary<RedisType, Label> TypeLabels { get; set; }
     private Dictionary<RedisType, Editor> TypeEditors { get; set; }
-    private KeyValuePair<RedisKey, RedisType> selectedKey { get; set; }
+    private KeyValuePair<RedisKey, RedisType> SelectedKey { get; set; }
 
     public RedisDatabasePage(ConnectionMultiplexer connection, RedisDatabaseConfiguration configuration)
     {
@@ -62,26 +62,24 @@ public partial class RedisDatabasePage : ContentPage
 
         try
         {
-            selectedKey = (KeyValuePair<RedisKey, RedisType>)TableOfKeys.SelectedItem;
+            SelectedKey = (KeyValuePair<RedisKey, RedisType>)TableOfKeys.SelectedItem;
             foreach (var column in TypeGrid.ColumnDefinitions)
             {
                 column.Width = new GridLength(0, GridUnitType.Star);
             }
-            TypeGrid.ColumnDefinitions.ElementAt(TypeGrids[selectedKey.Value]).Width = new GridLength(1, GridUnitType.Star);
-            TypeLabels[selectedKey.Value].Text = selectedKey.Key;
-            if (selectedKey.Value == RedisType.String)
+            TypeGrid.ColumnDefinitions.ElementAt(TypeGrids[SelectedKey.Value]).Width = new GridLength(1, GridUnitType.Star);
+            TypeLabels[SelectedKey.Value].Text = SelectedKey.Key;
+            if (SelectedKey.Value == RedisType.String)
             {
-                StringValueEditor.Text = await RedisDatabase.StringGetAsync(selectedKey.Key);
+                StringValueEditor.Text = await RedisDatabase.StringGetAsync(SelectedKey.Key);
             }
-            if (selectedKey.Value == RedisType.List)
+            if (SelectedKey.Value == RedisType.List)
             {
-                var list = await RedisDatabase.ListGetAsync(selectedKey.Key);
-                ListValueCollectionView.ItemsSource = await RedisDatabase.ListGetAsync(selectedKey.Key);
+                ListValueCollectionView.ItemsSource = await RedisDatabase.ListGetAsync(SelectedKey.Key);
             }
-            if (selectedKey.Value == RedisType.Set)
+            if (SelectedKey.Value == RedisType.Set)
             {
-                var set = await RedisDatabase.SetGetAsync(selectedKey.Key);
-                SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(selectedKey.Key);
+                SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(SelectedKey.Key);
             }
         }
         catch (InvalidOperationException ex)
@@ -101,12 +99,12 @@ public partial class RedisDatabasePage : ContentPage
     private void EditValueButtonClicked(object sender, EventArgs e)
     {
         GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 45;
-        TypeEditors[selectedKey.Value].IsReadOnly = false;
+        TypeEditors[SelectedKey.Value].IsReadOnly = false;
     }
 
     public async void SaveChangesButtonClickedAsync(object sender, EventArgs e)
     {
-        var deletingKey = selectedKey.Key;
+        var deletingKey = SelectedKey.Key;
         try
         {
             await RedisDatabase.StringSetValueAsync(deletingKey, StringValueEditor.Text);
@@ -122,7 +120,7 @@ public partial class RedisDatabasePage : ContentPage
         finally
         {
             GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 0;
-            TypeEditors[selectedKey.Value].IsReadOnly = true;
+            TypeEditors[SelectedKey.Value].IsReadOnly = true;
         }
     }
 
@@ -138,7 +136,7 @@ public partial class RedisDatabasePage : ContentPage
 
     public async void DeleteKeyButtonClickedAsync(object sender, EventArgs e)
     {
-        var deletingKey = selectedKey.Key;
+        var deletingKey = SelectedKey.Key;
         try
         {
             await RedisDatabase.DeleteKeyAsync(deletingKey);
@@ -200,8 +198,87 @@ public partial class RedisDatabasePage : ContentPage
             }
             TypeGrid.ColumnDefinitions.ElementAt(0).Width = new GridLength(1, GridUnitType.Star);
         }
+    }
+
+    private void AddElementToListButtonClicked(object sender, EventArgs e)
+    {
+        EditingListKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
+
+        EditingListKeyGrid.RowDefinitions.ElementAt(0).Height = 100;
+    }
+
+    private async void ApplyAddingElementToListButtonClickedAsync(object sender, EventArgs e)
+    {
+        var key = SelectedKey.Key;
+        try
+        {
+            var newValue = GettingNewElementForListEntry.Text;
+            if (DirectionOfAddingElementForListPicker.SelectedIndex == 0)
+            {
+                await RedisDatabase.ListAddRightAsync(key, newValue);
+                ListValueCollectionView.ItemsSource = await RedisDatabase.ListGetAsync(SelectedKey.Key);
+            }
+            else
+            {
+                await RedisDatabase.ListAddLeftAsync(key, newValue);
+                ListValueCollectionView.ItemsSource = await RedisDatabase.ListGetAsync(SelectedKey.Key);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Error while adding element", "OK");
+        }
+        finally
+        {
+            EditingListKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+        }
+
+    }
 
 
 
+    private void RemoveElementFromListButtonClicked(object sender, EventArgs e)
+    {
+        EditingListKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+
+        EditingListKeyGrid.RowDefinitions.ElementAt(1).Height = 100;
+    }
+
+    private async void ApplyRemovalElementToListButtonClickedAsync(object sender, EventArgs e)
+    {
+        var key = SelectedKey.Key;
+        try
+        {
+            var count = int.Parse(GettingCountOfRemovingElementForListEntry.Text);
+            if (DirectionOfRemovingElementForListPicker.SelectedIndex == 0)
+            {
+                await RedisDatabase.ListRemoveRightAsync(key, count);
+                ListValueCollectionView.ItemsSource = await RedisDatabase.ListGetAsync(SelectedKey.Key);
+            }
+            else
+            {
+                await RedisDatabase.ListRemoveLeftAsync(key, count);
+                ListValueCollectionView.ItemsSource = await RedisDatabase.ListGetAsync(SelectedKey.Key);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Error while removing element", "OK");
+        }
+        finally
+        {
+            //TableOfKeys.ItemsSource = new Dictionary<RedisKey, RedisType>(KeyTypePairs);
+            
+
+            EditingListKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
+        }
     }
 }

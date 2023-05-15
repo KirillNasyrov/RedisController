@@ -422,7 +422,7 @@
                                                  BackgroundColor="#282a30"
                                                  Padding="18"
                                                  Clicked="RedisConfigurationRemoved"
-                                                 CommandParameter="{Binding .}">
+                                                 CommandParameter="{Binding }">
 
 
                                     </ImageButton>

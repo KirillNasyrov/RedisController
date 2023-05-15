@@ -85,6 +85,58 @@ public class RedisDatabase
         }
     }
 
+    public async Task ListAddRightAsync(RedisKey key, RedisValue value)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.ListRightPushAsync(key, value);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
+    public async Task ListAddLeftAsync(RedisKey key, RedisValue value)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.ListLeftPushAsync(key, value);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
+
+
+    public async Task ListRemoveRightAsync(RedisKey key, int count)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.ListRightPopAsync(key,count);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
+    public async Task ListRemoveLeftAsync(RedisKey key, int count)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.ListLeftPopAsync(key, count);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
+
+
     public async Task<List<RedisValue>> SetGetAsync(RedisKey key)
     {
         if (Server.IsConnected)
