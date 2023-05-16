@@ -22,6 +22,54 @@ public partial class StartPage
 
     }
 
+    public async void HelpButtonClicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Help", "Telegram: https://t.me/Kir1llLL", "OK");
+    }
+
+
+
+    private async void BrowserRedisOpenClicked(object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new Uri("https://redis.io/docs/");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception )
+        {
+            // An unexpected error occurred. No browser may be installed on the device.
+        }
+    }
+
+    private async void BrowserDockerOpenClicked(object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new Uri("https://redis.io/docs/stack/get-started/install/docker/");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception)
+        {
+            // An unexpected error occurred. No browser may be installed on the device.
+        }
+    }
+
+    private async void BrowserGitHubOpenClicked(object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new Uri("https://github.com/KirillNasyrov/RedisExplorer");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception)
+        {
+            // An unexpected error occurred. No browser may be installed on the device.
+        }
+    }
+
+
+
     private async void RedisConfigurationSelectedAsync(object sender, SelectionChangedEventArgs e)
     {
         if (TableOfConfigs.SelectedItem == null)

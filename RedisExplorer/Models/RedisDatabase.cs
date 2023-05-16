@@ -174,5 +174,42 @@ public class RedisDatabase
         }
     }
 
+
+    public async Task<List<HashEntry>> HashGetAsync(RedisKey key)
+    {
+        if (Server.IsConnected)
+        {
+            return new List<HashEntry>(await Database.HashGetAllAsync(key));
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
+    public async Task HashSetFieldAsync(RedisKey key, HashEntry[] filed)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.HashSetAsync(key, filed);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
+    public async Task HashRemoveFieldAsync(RedisKey key, RedisValue filed)
+    {
+        if (Server.IsConnected)
+        {
+            await Database.HashDeleteAsync(key, filed);
+        }
+        else
+        {
+            throw new InvalidOperationException("Server is not connected");
+        }
+    }
+
 }
 

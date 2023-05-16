@@ -25,7 +25,6 @@ public partial class RedisDatabasePage : ContentPage
             {RedisType.List, 2 },
             {RedisType.Set, 3 },
             {RedisType.Hash, 4 },
-            {RedisType.Stream, 5 }
         };
         RedisDatabase = new RedisDatabase(connection, configuration);
         Configuration = configuration;
@@ -38,6 +37,7 @@ public partial class RedisDatabasePage : ContentPage
             {RedisType.String, StringKeyNameLabel },
             {RedisType.List, ListKeyNameLabel },
             {RedisType.Set, SetKeyNameLabel },
+            {RedisType.Hash, HashKeyNameLabel },
         };
 
         TypeEditors = new Dictionary<RedisType, Editor>()
@@ -47,6 +47,32 @@ public partial class RedisDatabasePage : ContentPage
 
         BindingContext = this;
     }
+
+    public async void HelpButtonClicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Help", "Telegram: https://t.me/Kir1llLL", "OK");
+    }
+
+
+
+    private async void BrowserRedisOpenClicked(object sender, System.EventArgs e)
+    {
+        try
+        {
+            Uri uri = new Uri("https://redis.io/docs/");
+            await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception)
+        {
+            // An unexpected error occurred. No browser may be installed on the device.
+        }
+    }
+
+
+
+
+
+
 
     private async void BackButtonClicked(object sender, EventArgs e)
     {
@@ -81,6 +107,10 @@ public partial class RedisDatabasePage : ContentPage
             {
                 SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(SelectedKey.Key);
             }
+            if (SelectedKey.Value == RedisType.Hash)
+            {
+                HashValueCollectionView.ItemsSource = await RedisDatabase.HashGetAsync(SelectedKey.Key);
+            }
         }
         catch (InvalidOperationException ex)
         {
@@ -92,13 +122,14 @@ public partial class RedisDatabasePage : ContentPage
         }
         finally
         {
+            CloseAll();
             TableOfKeys.SelectedItem = null;
         }
     }
 
     private void EditValueButtonClicked(object sender, EventArgs e)
     {
-        GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 45;
+        EditingStringKeyGrid.RowDefinitions.ElementAt(0).Height = 45;
         TypeEditors[SelectedKey.Value].IsReadOnly = false;
     }
 
@@ -119,19 +150,24 @@ public partial class RedisDatabasePage : ContentPage
         }
         finally
         {
-            GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 0;
+            EditingStringKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
             TypeEditors[SelectedKey.Value].IsReadOnly = true;
         }
     }
 
-    private void CancelEditingOrAddingKeyButtonClicked(object sender, EventArgs e)
+
+    private void CancelAddingKeyButtonClicked(object sender, EventArgs e)
     {
-        GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 0;
-        foreach (var column in TypeGrid.ColumnDefinitions)
-        {
-            column.Width = new GridLength(0, GridUnitType.Star);
-        }
+
+        TypeGrid.ColumnDefinitions.ElementAt(5).Width = new GridLength(0, GridUnitType.Star);
+
         TypeGrid.ColumnDefinitions.ElementAt(0).Width = new GridLength(1, GridUnitType.Star);
+    }
+
+
+    private void CancelEditingKeyButtonClicked(object sender, EventArgs e)
+    {
+        CloseAll();
     }
 
     public async void DeleteKeyButtonClickedAsync(object sender, EventArgs e)
@@ -152,7 +188,7 @@ public partial class RedisDatabasePage : ContentPage
         finally
         {
             TableOfKeys.ItemsSource = new Dictionary<RedisKey, RedisType>(KeyTypePairs);
-            GridWithCancelEditButtons.RowDefinitions.ElementAt(0).Height = 0;
+            EditingStringKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
             foreach (var column in TypeGrid.ColumnDefinitions)
             {
                 column.Width = new GridLength(0, GridUnitType.Star);
@@ -169,6 +205,11 @@ public partial class RedisDatabasePage : ContentPage
             column.Width = new GridLength(0, GridUnitType.Star);
         }
         TypeGrid.ColumnDefinitions.ElementAt(5).Width = new GridLength(1, GridUnitType.Star);
+
+        TypeOfAddingKeyPicker.SelectedIndex = 0;
+        NameOfAddingKeyEntry.Text = null;
+        StringValyeOfAddingKeyEditor.Text = null;
+
     }
 
     private async void ApplyAddingNewKeyButtonClickedAsync(object sender, EventArgs e)
@@ -202,6 +243,8 @@ public partial class RedisDatabasePage : ContentPage
 
     private void AddElementToListButtonClicked(object sender, EventArgs e)
     {
+        GettingNewElementForListEntry.Text = null;
+
         EditingListKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
 
         EditingListKeyGrid.RowDefinitions.ElementAt(0).Height = 100;
@@ -243,6 +286,8 @@ public partial class RedisDatabasePage : ContentPage
 
     private void RemoveElementFromListButtonClicked(object sender, EventArgs e)
     {
+        GettingCountOfRemovingElementForListEntry.Text = null;
+
         EditingListKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
 
         EditingListKeyGrid.RowDefinitions.ElementAt(1).Height = 100;
@@ -286,6 +331,8 @@ public partial class RedisDatabasePage : ContentPage
 
     private void AddElementToSetButtonClicked(object sender, EventArgs e)
     {
+        GettingNewMemberForSetEntry.Text = null;
+
         EditingSetKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
 
         EditingSetKeyGrid.RowDefinitions.ElementAt(0).Height = 100;
@@ -299,6 +346,7 @@ public partial class RedisDatabasePage : ContentPage
         {
             var value = GettingNewMemberForSetEntry.Text;
             await RedisDatabase.SetAddAsync(key, value);
+            SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(SelectedKey.Key);
         }
         catch (InvalidOperationException ex)
         {
@@ -310,7 +358,6 @@ public partial class RedisDatabasePage : ContentPage
         }
         finally
         {
-            SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(SelectedKey.Key);
             EditingSetKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
         }
     }
@@ -320,6 +367,8 @@ public partial class RedisDatabasePage : ContentPage
 
     private void RemoveElementFromSetButtonClicked(object sender, EventArgs e)
     {
+        GettingRemovingMemberFromSetEntry.Text = null;
+
         EditingSetKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
 
         EditingSetKeyGrid.RowDefinitions.ElementAt(1).Height = 100;
@@ -332,6 +381,7 @@ public partial class RedisDatabasePage : ContentPage
         {
             var value = GettingRemovingMemberFromSetEntry.Text;
             await RedisDatabase.SetRemoveAsync(key, value);
+            SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(SelectedKey.Key);
         }
         catch (InvalidOperationException ex)
         {
@@ -343,8 +393,91 @@ public partial class RedisDatabasePage : ContentPage
         }
         finally
         {
-            SetValueCollectionView.ItemsSource = await RedisDatabase.SetGetAsync(SelectedKey.Key);
             EditingSetKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
         }
+    }
+
+
+    private void AddFieldToHashButtonClicked(object sender, EventArgs e)
+    {
+        GettingNewFieldForHashEntry.Text = null;
+        GettingNewValueForHashEntry.Text = null;
+
+        EditingHashKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
+
+        EditingHashKeyGrid.RowDefinitions.ElementAt(0).Height = 100;
+    }
+
+    private async void ApplyAddingFieldToHashButtonClickedAsync(object sender, EventArgs e)
+    {
+        var key = SelectedKey.Key;
+        try
+        {
+            var field = GettingNewFieldForHashEntry.Text;
+            var value = GettingNewValueForHashEntry.Text;
+            HashEntry[] hashEntry = { new HashEntry(field, value) } ;
+            await RedisDatabase.HashSetFieldAsync(key, hashEntry);
+            HashValueCollectionView.ItemsSource = await RedisDatabase.HashGetAsync(SelectedKey.Key);
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Error while adding filed", "OK");
+        }
+        finally
+        {
+            EditingHashKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+        }
+    }
+
+
+
+    private void RemoveFieldFromHashButtonClicked(object sender, EventArgs e)
+    {
+        GettingRemovingFieldFromHashEntry.Text = null;
+
+        EditingHashKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+
+        EditingHashKeyGrid.RowDefinitions.ElementAt(1).Height = 100;
+    }
+
+    private async void ApplyRemovalFieldFromHashButtonClickedAsync(object sender, EventArgs e)
+    {
+        var key = SelectedKey.Key;
+        try
+        {
+            var filed = GettingRemovingFieldFromHashEntry.Text;
+            await RedisDatabase.HashRemoveFieldAsync(key, filed);
+            HashValueCollectionView.ItemsSource = await RedisDatabase.HashGetAsync(SelectedKey.Key);
+        }
+        catch (InvalidOperationException ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", "Error while adding filed", "OK");
+        }
+        finally
+        {
+            EditingHashKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
+        }
+    }
+
+    public void CloseAll()
+    {
+        EditingStringKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+
+        EditingListKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+        EditingListKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
+
+        EditingSetKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+        EditingSetKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
+
+        EditingHashKeyGrid.RowDefinitions.ElementAt(0).Height = 0;
+        EditingHashKeyGrid.RowDefinitions.ElementAt(1).Height = 0;
     }
 }
