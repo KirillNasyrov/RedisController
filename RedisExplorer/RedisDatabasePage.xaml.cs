@@ -48,6 +48,15 @@ public partial class RedisDatabasePage : ContentPage
         BindingContext = this;
     }
 
+
+    private void RefreshDatabaseButtonClicked(object sender, EventArgs e)
+    {
+        TableOfKeys.ItemsSource = new Dictionary<RedisKey, RedisType>(KeyTypePairs);
+    }
+
+
+
+
     public async void HelpButtonClicked(object sender, EventArgs e)
     {
         await DisplayAlert("Help", "Telegram: https://t.me/Kir1llLL", "OK");

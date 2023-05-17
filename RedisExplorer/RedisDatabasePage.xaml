@@ -116,6 +116,7 @@
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
 
@@ -155,6 +156,18 @@
                                Margin="0,10">
 
                         </Entry>
+
+                        <ImageButton Source="refresh.png"
+                                     Grid.Row="0"
+                                     Grid.Column="3"
+                                     BackgroundColor="#282a30"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="End"
+                                     Padding="17"
+                                     Margin="0,0,10,0"
+                                     Clicked="RefreshDatabaseButtonClicked">
+
+                        </ImageButton>
 
 
                     </Grid>
@@ -2703,6 +2716,32 @@
                                 </Grid.ColumnDefinitions>
 
 
+                                <Border Grid.Row="0"
+                                        Grid.Column="0"
+                                        StrokeThickness="0">
+
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+
+                                    <Editor Placeholder="Enter Value"
+                                            PlaceholderColor="#707382"
+                                            BackgroundColor="#393c46"
+                                            HorizontalTextAlignment="Start"
+                                            VerticalTextAlignment="Start"
+                                            FontFamily="Roboto"
+                                            TextColor="#d2d2d3"
+                                            AutoSize="TextChanges"
+                                            IsSpellCheckEnabled="False"
+                                            x:Name="ListValyeOfAddingKeyEditor">
+
+                                    </Editor>
+
+                                </Border>
+
+
                             </Grid>
 
 
@@ -2720,6 +2759,31 @@
                                 </Grid.ColumnDefinitions>
 
 
+                                <Border Grid.Row="0"
+                                        Grid.Column="0"
+                                        StrokeThickness="0">
+
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20" />
+                                    </Border.StrokeShape>
+
+
+                                    <Editor Placeholder="Enter Member"
+                                            PlaceholderColor="#707382"
+                                            BackgroundColor="#393c46"
+                                            HorizontalTextAlignment="Start"
+                                            VerticalTextAlignment="Start"
+                                            FontFamily="Roboto"
+                                            TextColor="#d2d2d3"
+                                            AutoSize="TextChanges"
+                                            IsSpellCheckEnabled="False"
+                                            x:Name="SetValyeOfAddingKeyEditor">
+
+                                    </Editor>
+
+                                </Border>
+
                             </Grid>
 
 
@@ -2734,27 +2798,40 @@
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-
-                            </Grid>
-
-
-                            <!--Область для добавления stream ключа-->
-                            <Grid Grid.Row="0"
-                                  Grid.Column="4"
-                                  x:Name="AddingNewStreamKeyGrid">
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
 
+                                <Entry Grid.Row="0"
+                                       Grid.Column="0"
+                                       BackgroundColor="#393c46"
+                                       Placeholder="Enter Field"
+                                       FontFamily="Roboto"
+                                       FontSize="15"
+                                       PlaceholderColor="#767a87"
+                                       TextColor="#d2d2d3"
+                                       x:Name="NewFieldForHashEntry"
+                                       HeightRequest="45">
+
+                                </Entry>
+
+
+                                <Entry Grid.Row="0"
+                                       Grid.Column="1"
+                                       BackgroundColor="#393c46"
+                                       Placeholder="Enter Value"
+                                       FontFamily="Roboto"
+                                       FontSize="15"
+                                       PlaceholderColor="#767a87"
+                                       TextColor="#d2d2d3"
+                                       x:Name="NewValueForHashEntry"
+                                       HeightRequest="45">
+
+                                </Entry>
+
+
                             </Grid>
+
 
 
 
